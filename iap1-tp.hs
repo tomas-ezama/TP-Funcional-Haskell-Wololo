@@ -123,17 +123,22 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 -- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u2 0
-
-existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Bool
 -- Idea:
 {-
-existeSecuenciaDeAmigosAux red u1 u2 k
-    | k = longitud (amigosDe u1) = False
-    | u1 se relaciona con u2 = True
+existeSecuenciaDeAmigos red u1 u2
+    | u1 se relaciona con u2 = True                                                                                 -- O sea, (u1, u2) existe
     | (relaciones de u1) se relaciona con u2 = True
-    | Relaciones u1[k] (u1, uX) = existeSecuenciaDeAmigos red uX u2 (k + 1)
+existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u1 u2
+
+existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Usuario -> Bool
+existeSecuenciaDeAmigosAux red u1 uX u2
+    | longitud (amigosDeAQueNoSeanBOCadenaDeAmigosDeB uX u1) == 0 = False
+    | uX se relaciona con u2 = True                                                                                 -- O sea, (uX, u2) existe
+    | otherwise = existeSecuenciaDeAmigosAux red u1 (Todos los uY tales que Relaciones (uX, uY) existen) u2
+    
+amigosDeAQueNoSeanBOCadenaDeAmigosDeB :: ...
 -}
+
 
 -- Funciones varias
 
