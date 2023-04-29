@@ -3,7 +3,7 @@
 -- Nombre de Grupo: xx
 -- Integrante 1: Tomas Ezama, tomasezama@gmail.com, 475/23 
 -- Integrante 2: Eduardo Baars, eduardobaars@id.uff.br, 1338/21
--- Integrante 3: Nombre Apellido, email, LU
+-- Integrante 3: Mauricio Romero Laino, mauricioromerolaino@gmail.com, 18/23
 -- Integrante 4: Nombre Apellido, email, LU
 
 type Usuario = (Integer, String) -- (id, nombre)
@@ -40,8 +40,12 @@ nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios x = proyectarNombres(usuarios x)
 
 proyectarNombres :: [Usuario] -> [String]
-proyectarNombres [] = []
-proyectarNombres (x:xs) = nombreDeUsuario x : proyectarNombres xs
+-- Proyectar nombres sin repetidos
+proyectarNombres us = eliminarRepetidos (proyectarNombresConRepetidos (us))
+
+proyectarNombresConRepetidos :: [Usuario] -> [String]
+proyectarNombresConRepetidos [] = []
+proyectarNombresConRepetidos (x:xs) = nombreDeUsuario x : proyectarNombresConRepetidos xs
 
 -- describir qué hace la función: .....
 amigosDe :: RedSocial -> Usuario -> [Usuario]
@@ -74,19 +78,36 @@ proyectarUsuarioConMasAmigos (x:y:xs) r | contarAmigosDe r x >= contarAmigosDe r
                                 
 -- describir qué hace la función: .....
 estaRobertoCarlos :: RedSocial -> Bool
-estaRobertoCarlos r = contarAmigosDe (relaciones r) (usuarioConMasAmigos r) >= 1000000
+estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 1000000
 
 -- describir qué hace la función: .....
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
-publicacionesDe = undefined
+publicacionesDe red u = auxiliarPublicacionesDe (publicaciones (red)) (u)
+
+auxiliarPublicacionesDe :: [Publicacion] -> Usuario -> [Publicacion]
+-- Nota temporal: Le paso como input (publicaciones (red))
+auxiliarPublicacionesDe [] _ = []
+--auxiliarPublicacionesDe (x:xs) u = if (usuarioDePublicacion (x)) == u then (x) : auxiliarPublicacionesDe xs u else auxiliarPublicacionesDe xs u
+auxiliarPublicacionesDe (x:xs) u | usuarioDePublicacion (x) == u = (x) : auxiliarPublicacionesDe xs u
+                                 | otherwise = auxiliarPublicacionesDe xs u
+
 
 -- describir qué hace la función: .....
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
-publicacionesQueLeGustanA = undefined
+publicacionesQueLeGustanA red u = auxiliarPublicacionesQueLeGustanA (publicaciones (red)) (u)
+
+auxiliarPublicacionesQueLeGustanA :: [Publicacion] -> Usuario -> [Publicacion]
+-- Nota temporal: Le paso como input (publicaciones (red))
+auxiliarPublicacionesQueLeGustanA [] _ = []
+auxiliarPublicacionesQueLeGustanA (x:xs) u | pertenece (u) (likesDePublicacion (x)) = (x) : auxiliarPublicacionesQueLeGustanA xs u
+                                           | otherwise = auxiliarPublicacionesQueLeGustanA xs u
+-- OBS temporal: auxiliarPublicacionesDe y auxiliarPublicacionesQueLeGustanA tienen el mismo código cambiando la función que útilizan
+
 
 -- describir qué hace la función: .....
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
-lesGustanLasMismasPublicaciones = undefined
+lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA (red) (u1)) (publicacionesQueLeGustanA (red) (u2))
+
 
 -- describir qué hace la función: .....
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
@@ -96,3 +117,35 @@ tieneUnSeguidorFiel = undefined
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos = undefined
 
+
+-- Funciones varias
+
+pertenece :: (Eq t) => t -> [t] -> Bool
+-- Requiere: True
+pertenece _ [] = False
+pertenece e (x:xs) = if e == x then True else pertenece e xs
+
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+-- Requiere: True
+eliminarRepetidos s | todosDistintos s = s  
+eliminarRepetidos (x:xs) = (x) : (if pertenece x xs then (eliminarRepetidos (quitarTodos x xs)) else (eliminarRepetidos xs))
+
+quitarTodos :: (Eq t) => t -> [t] -> [t]
+-- Requiere: True
+quitarTodos _ [] = []
+quitarTodos e (x:xs) = if e == x then (quitarTodos e xs) else (x) : (quitarTodos e xs)
+
+todosDistintos :: (Eq t) => [t] -> Bool
+-- Requiere: True
+todosDistintos [] = True
+todosDistintos (x:xs) = (not (pertenece x xs)) && (todosDistintos xs)
+
+esContenido :: (Eq t) => [t] -> [t] -> Bool
+-- Requiere: True
+-- Quiero ver que a contenido en b. o sea cada elemento de a esta también en b.
+esContenido [] b = True
+esContenido (x:xs) b = if pertenece x b then esContenido xs b else False
+
+mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+-- Requiere: True
+mismosElementos s r = (esContenido s r) && (esContenido r s)
