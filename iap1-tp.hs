@@ -128,7 +128,7 @@ existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos red u1 u2
     | u1 se relaciona con u2 = True                                                                                 -- O sea, (u1, u2) existe
     | (relaciones de u1) se relaciona con u2 = True
-existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u1 u2
+    | otherwise = existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u1 u2
 
 existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigosAux red u1 uX u2
