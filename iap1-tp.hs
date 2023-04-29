@@ -41,7 +41,7 @@ nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios x = proyectarNombres(usuarios x)
 
 proyectarNombres :: [Usuario] -> [String]
--- Proyectar nombres sin repetidos
+-- Proyectar nombres sin repetidos.
 proyectarNombres us = eliminarRepetidos (proyectarNombresConRepetidos (us))
 
 proyectarNombresConRepetidos :: [Usuario] -> [String]
@@ -123,8 +123,17 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 -- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigos = undefined
+existeSecuenciaDeAmigos = existeSecuenciaDeAmigosAux red u1 u2 0
 
+existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Bool
+-- Idea:
+{-
+existeSecuenciaDeAmigosAux red u1 u2 k
+    | k = longitud (amigosDe u1) = False
+    | u1 se relaciona con u2 = True
+    | (relaciones de u1) se relaciona con u2 = True
+    | Relaciones u1[k] (u1, uX) = existeSecuenciaDeAmigos red uX u2 (k + 1)
+-}
 
 -- Funciones varias
 
