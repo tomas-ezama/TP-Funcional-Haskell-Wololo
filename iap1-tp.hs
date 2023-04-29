@@ -122,7 +122,22 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 -- describir qué hace la función: .....
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigos = undefined
+existeSecuenciaDeAmigos r u1 u2 = existeSecuenciaDeAmigosAuxiliar (relaciones r) u1 u2 (amigosDe r u1)
+
+existeSecuenciaDeAmigosAuxiliar :: [Relacion] -> Usuario -> Usuario -> [Usuario]-> Bool
+existeSecuenciaDeAmigosAuxiliar _ _ _ [] = False
+existeSecuenciaDeAmigosAuxiliar r u u2 (f:fs)| sonAmigos r u u2 = True 
+                                           | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe r u) f u2 (fs ++ (proyectarNombresDeAmigosDe f r))
+
+eliminarRelacionesDe :: [Relacion] -> Usuario -> [Relacion]
+eliminarRelacionesDe [] _ = []
+eliminarRelacionesDe (r:rs) u | estaEnRelacion u r = eliminarRelacionesDe rs u
+                            | otherwise = r : eliminarRelacionesDe rs u
+
+sonAmigos :: [Relacion] -> Usuario -> Usuario -> Bool
+sonAmigos [] _ _ = False
+sonAmigos (r:rs) u u2 | estaEnRelacion u r && estaEnRelacion u2 r = True
+                      | otherwise = sonAmigos rs u u2
 
 
 -- Funciones varias
@@ -131,6 +146,9 @@ pertenece :: (Eq t) => t -> [t] -> Bool
 -- Requiere: True
 pertenece _ [] = False
 pertenece e (x:xs) = if e == x then True else pertenece e xs
+
+estaEnRelacion :: Usuario -> Relacion -> Bool
+estaEnRelacion u (r1, r2) = u == r1 || u == r2
 
 eliminarRepetidos :: (Eq t) => [t] -> [t]
 -- Requiere: True
