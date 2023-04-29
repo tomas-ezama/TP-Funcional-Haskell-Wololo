@@ -50,8 +50,8 @@ amigosDe r u = proyectarNombresDeAmigosDe u (relaciones r)
 proyectarNombresDeAmigosDe :: Usuario -> [Relacion] -> [Usuario]
 proyectarNombresDeAmigosDe _ [] = []
 proyectarNombresDeAmigosDe u ((x, y):xs) | u == x = y : proyectarNombresDeAmigosDe u xs 
-                                        | u == y = x : proyectarNombresDeAmigosDe u xs
-                                        | otherwise = proyectarNombresDeAmigosDe u xs
+                                         | u == y = x : proyectarNombresDeAmigosDe u xs
+                                         | otherwise = proyectarNombresDeAmigosDe u xs
 
 -- describir qué hace la función: .....
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
@@ -70,7 +70,7 @@ usuarioConMasAmigos r = proyectarUsuarioConMasAmigos (usuarios r) (relaciones r)
 proyectarUsuarioConMasAmigos :: [Usuario] -> [Relacion] -> Usuario
 proyectarUsuarioConMasAmigos [x] _ = x
 proyectarUsuarioConMasAmigos (x:y:xs) r | contarAmigosDe r x >= contarAmigosDe r y = proyectarUsuarioConMasAmigos (x:xs) r
-                                      | otherwise = proyectarUsuarioConMasAmigos (y:xs) r
+                                        | otherwise = proyectarUsuarioConMasAmigos (y:xs) r
                                 
 -- describir qué hace la función: .....
 estaRobertoCarlos :: RedSocial -> Bool
