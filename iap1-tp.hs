@@ -40,8 +40,12 @@ nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios x = proyectarNombres(usuarios x)
 
 proyectarNombres :: [Usuario] -> [String]
-proyectarNombres [] = []
-proyectarNombres (x:xs) = nombreDeUsuario x : proyectarNombres xs
+-- Proyectar nombres sin repetidos
+proyectarNombres us = eliminarRepetidos (proyectarNombresConRepetidos (us))
+
+proyectarNombresConRepetidos :: [Usuario] -> [String]
+proyectarNombresConRepetidos [] = []
+proyectarNombresConRepetidos (x:xs) = nombreDeUsuario x : proyectarNombresConRepetidos xs
 
 -- describir qué hace la función: .....
 amigosDe :: RedSocial -> Usuario -> [Usuario]
@@ -96,3 +100,27 @@ tieneUnSeguidorFiel = undefined
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos = undefined
 
+
+
+
+-- Funciones varias
+
+pertenece :: (Eq t) => t -> [t] -> Bool
+-- Requiere: True
+pertenece _ [] = False
+pertenece e (x:xs) = if e == x then True else pertenece e xs
+
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+-- Requiere: True
+eliminarRepetidos s | todosDistintos s = s  
+eliminarRepetidos (x:xs) = (x) : (if pertenece x xs then (eliminarRepetidos (quitarTodos x xs)) else (eliminarRepetidos xs))
+
+quitarTodos :: (Eq t) => t -> [t] -> [t]
+-- Requiere: True
+quitarTodos _ [] = []
+quitarTodos e (x:xs) = if e == x then (quitarTodos e xs) else (x) : (quitarTodos e xs)
+
+todosDistintos :: (Eq t) => [t] -> Bool
+-- Requiere: True
+todosDistintos [] = True
+todosDistintos (x:xs) = (not (pertenece x xs)) && (todosDistintos xs)
