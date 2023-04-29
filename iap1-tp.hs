@@ -37,7 +37,11 @@ likesDePublicacion (_, _, us) = us
 -- Ejercicios
 
 nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios = undefined
+nombresDeUsuarios x = proyectarNombres(usuarios x)
+
+proyectarNombres :: [Usuario] -> [String]
+proyectarNombres [] = []
+proyectarNombres (x:xs) = nombreDeUsuario x : proyectarNombres xs
 
 -- describir qué hace la función: .....
 amigosDe :: RedSocial -> Usuario -> [Usuario]
@@ -75,12 +79,3 @@ tieneUnSeguidorFiel = undefined
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos = undefined
 
-
--- Predicados Auxiliares
-pertence :: t -> [t] -> Bool
-pertence _ [] = False
-pertence x y:ys |  x == y = True
-                | otherwise = pertence x ys
-
-mismosElementos :: [t] -> [t] -> Bool
-mismosElementos = undefined
