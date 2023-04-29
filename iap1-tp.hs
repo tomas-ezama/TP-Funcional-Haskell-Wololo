@@ -94,7 +94,15 @@ auxiliarPublicacionesDe (x:xs) u | usuarioDePublicacion (x) == u = (x) : auxilia
 
 -- describir qué hace la función: .....
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
-publicacionesQueLeGustanA = undefined
+publicacionesQueLeGustanA red u = auxiliarPublicacionesQueLeGustanA (publicaciones (red)) (u)
+
+auxiliarPublicacionesQueLeGustanA :: [Publicacion] -> Usuario -> [Publicacion]
+-- Nota temporal: Le paso como input (publicaciones (red))
+auxiliarPublicacionesQueLeGustanA [] _ = []
+auxiliarPublicacionesQueLeGustanA (x:xs) u | pertenece (u) (likesDePublicacion (x)) = (x) : auxiliarPublicacionesQueLeGustanA xs u
+                                           | otherwise = auxiliarPublicacionesQueLeGustanA xs u
+-- OBS temporal: auxiliarPublicacionesDe y auxiliarPublicacionesQueLeGustanA tienen el mismo código cambiando la función que útilizan
+
 
 -- describir qué hace la función: .....
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
