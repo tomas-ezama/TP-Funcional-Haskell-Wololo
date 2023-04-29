@@ -1,8 +1,8 @@
 -- Completar con los datos del grupo
 --
 -- Nombre de Grupo: xx
--- Integrante 1: Nombre Apellido, email, LU
--- Integrante 2: Eduardo Baars, eduardobaars@id.uff.br, LU
+-- Integrante 1: Tomas Ezama, tomasezama@gmail.com, 475/23 
+-- Integrante 2: Eduardo Baars, eduardobaars@id.uff.br, 1338/21
 -- Integrante 3: Nombre Apellido, email, LU
 -- Integrante 4: Nombre Apellido, email, LU
 
@@ -74,3 +74,13 @@ tieneUnSeguidorFiel = undefined
 -- describir qué hace la función: .....
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos = undefined
+
+
+-- Predicados Auxiliares
+pertence :: t -> [t] -> Bool
+pertence _ [] = False
+pertence x y:ys |  x == y = True
+                | otherwise = pertence x ys
+
+mismosElementos :: [t] -> [t] -> Bool
+mismosElementos = undefined
