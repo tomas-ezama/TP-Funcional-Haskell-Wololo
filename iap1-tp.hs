@@ -123,7 +123,7 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 -- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigos = existeSecuenciaDeAmigosAux red u1 u2 0
+existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u2 0
 
 existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Bool
 -- Idea:
