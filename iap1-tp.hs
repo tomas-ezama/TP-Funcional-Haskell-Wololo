@@ -111,7 +111,7 @@ lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeG
 
 -- describir qué hace la función: .....
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel r u = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (usuarios r)
+tieneUnSeguidorFiel r u = if (publicacionesDe r u) /= [] then auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (usuarios r) else False
 
 auxiliarTieneUnSeguidorFiel :: [Publicacion] -> [Usuario]-> Bool
 auxiliarTieneUnSeguidorFiel _ [] = False
