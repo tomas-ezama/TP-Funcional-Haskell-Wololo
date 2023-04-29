@@ -2,7 +2,7 @@
 --
 -- Nombre de Grupo: xx
 -- Integrante 1: Nombre Apellido, email, LU
--- Integrante 2: Nombre Apellido, email, LU
+-- Integrante 2: Eduardo Baars, eduardobaars@id.uff.br, LU
 -- Integrante 3: Nombre Apellido, email, LU
 -- Integrante 4: Nombre Apellido, email, LU
 
