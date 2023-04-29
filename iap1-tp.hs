@@ -106,7 +106,8 @@ auxiliarPublicacionesQueLeGustanA (x:xs) u | pertenece (u) (likesDePublicacion (
 
 -- describir qué hace la función: .....
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
-lesGustanLasMismasPublicaciones = undefined
+lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA (red) (u1)) (publicacionesQueLeGustanA (red) (u2))
+
 
 -- describir qué hace la función: .....
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
@@ -138,3 +139,13 @@ todosDistintos :: (Eq t) => [t] -> Bool
 -- Requiere: True
 todosDistintos [] = True
 todosDistintos (x:xs) = (not (pertenece x xs)) && (todosDistintos xs)
+
+esContenido :: (Eq t) => [t] -> [t] -> Bool
+-- Requiere: True
+-- Quiero ver que a contenido en b. o sea cada elemento de a esta también en b.
+esContenido [] b = True
+esContenido (x:xs) b = if pertenece x b then esContenido xs b else False
+
+mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+-- Requiere: True
+mismosElementos s r = (esContenido s r) && (esContenido r s)
