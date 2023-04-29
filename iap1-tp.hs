@@ -82,7 +82,15 @@ estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 100
 
 -- describir qué hace la función: .....
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
-publicacionesDe = undefined
+publicacionesDe red u = auxiliarPublicacionesDe (publicaciones (red)) (u)
+
+auxiliarPublicacionesDe :: [Publicacion] -> Usuario -> [Publicacion]
+-- Nota temporal: Le paso como input (publicaciones (red))
+auxiliarPublicacionesDe [] _ = []
+--auxiliarPublicacionesDe (x:xs) u = if (usuarioDePublicacion (x)) == u then (x) : auxiliarPublicacionesDe xs u else auxiliarPublicacionesDe xs u
+auxiliarPublicacionesDe (x:xs) u | usuarioDePublicacion (x) == u = (x) : auxiliarPublicacionesDe xs u
+                                 | otherwise = auxiliarPublicacionesDe xs u
+
 
 -- describir qué hace la función: .....
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
@@ -99,8 +107,6 @@ tieneUnSeguidorFiel = undefined
 -- describir qué hace la función: .....
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos = undefined
-
-
 
 
 -- Funciones varias
