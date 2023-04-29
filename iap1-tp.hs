@@ -1,6 +1,6 @@
 -- Completar con los datos del grupo
 --
--- Nombre de Grupo: xx
+-- Nombre de Grupo: wololo
 -- Integrante 1: Tomas Ezama, tomasezama@gmail.com, 475/23 
 -- Integrante 2: Eduardo Baars, eduardobaars@id.uff.br, 1338/21
 -- Integrante 3: Mauricio Romero Laino, mauricioromerolaino@gmail.com, 18/23
