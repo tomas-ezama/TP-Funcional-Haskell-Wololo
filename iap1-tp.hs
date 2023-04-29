@@ -62,11 +62,16 @@ contarAmigosDe [] _ = 0
 contarAmigosDe ((x, y):xs) u | u == x = 1 + contarAmigosDe xs u
                              | u == y = 1 + contarAmigosDe xs u
                              | otherwise = 0 + contarAmigosDe xs u
-                             
+
 -- describir qué hace la función: .....
 usuarioConMasAmigos :: RedSocial -> Usuario
-usuarioConMasAmigos = undefined
+usuarioConMasAmigos r = proyectarUsuarioConMasAmigos (usuarios r) (relaciones r)
 
+proyectarUsuarioConMasAmigos :: [Usuario] -> [Relacion] -> Usuario
+proyectarUsuarioConMasAmigos [x] _ = x
+proyectarUsuarioConMasAmigos (x:y:xs) r | contarAmigosDe r x >= contarAmigosDe r y = proyectarUsuarioConMasAmigos (x:xs) r
+                                      | otherwise = proyectarUsuarioConMasAmigos (y:xs) r
+                                
 -- describir qué hace la función: .....
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos = undefined
