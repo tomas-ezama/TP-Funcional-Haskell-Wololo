@@ -111,7 +111,14 @@ lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeG
 
 -- describir qué hace la función: .....
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel = undefined
+tieneUnSeguidorFiel r u = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (usuarios r)
+
+auxiliarTieneUnSeguidorFiel :: [Publicacion] -> [Usuario]-> Bool
+auxiliarTieneUnSeguidorFiel _ [] = False
+auxiliarTieneUnSeguidorFiel [] _ = True
+auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarNoRepetidos ((u) ++ (likesDePublicacion p)))
+
+
 
 -- describir qué hace la función: .....
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
@@ -129,6 +136,12 @@ eliminarRepetidos :: (Eq t) => [t] -> [t]
 -- Requiere: True
 eliminarRepetidos s | todosDistintos s = s  
 eliminarRepetidos (x:xs) = (x) : (if pertenece x xs then (eliminarRepetidos (quitarTodos x xs)) else (eliminarRepetidos xs))
+
+eliminarNoRepetidos :: (Eq t) => [t] -> [t]
+-- Funcion elimina elementos no repetidos en caso de estar repetido quedaran n-1 repeticiones. [1,1,1] -> [1,1]
+-- Requiere: True
+eliminarNoRepetidos s | todosDistintos s = []
+eliminarNoRepetidos (x:xs) = (if not(pertenece x xs) then (eliminarNoRepetidos xs) else (x : eliminarNoRepetidos xs))
 
 quitarTodos :: (Eq t) => t -> [t] -> [t]
 -- Requiere: True
