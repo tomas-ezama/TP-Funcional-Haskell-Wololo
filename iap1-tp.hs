@@ -4,7 +4,7 @@
 -- Integrante 1: Tomas Ezama, tomasezama@gmail.com, 475/23 
 -- Integrante 2: Eduardo Baars, eduardobaars@id.uff.br, 1338/21
 -- Integrante 3: Mauricio Romero Laino, mauricioromerolaino@gmail.com, 18/23
--- Integrante 4: Nombre Apellido, email, LU
+-- Integrante 4: Cian Andrés Bautista, andycia802@gmail.com, 937/21
 
 type Usuario = (Integer, String) -- (id, nombre)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
@@ -36,18 +36,19 @@ likesDePublicacion (_, _, us) = us
 
 -- Ejercicios
 
+-- Devuelve una lista con todos los usuarios de la red social dada.
 nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios x = proyectarNombres(usuarios x)
 
 proyectarNombres :: [Usuario] -> [String]
--- Proyectar nombres sin repetidos
+-- Proyectar nombres sin repetidos.
 proyectarNombres us = eliminarRepetidos (proyectarNombresConRepetidos (us))
 
 proyectarNombresConRepetidos :: [Usuario] -> [String]
 proyectarNombresConRepetidos [] = []
 proyectarNombresConRepetidos (x:xs) = nombreDeUsuario x : proyectarNombresConRepetidos xs
 
--- describir qué hace la función: .....
+-- Devuelve una lista con todos los amigos del usuario dado en la red social dada.
 amigosDe :: RedSocial -> Usuario -> [Usuario]
 amigosDe r u = proyectarNombresDeAmigosDe u (relaciones r)
 
@@ -57,7 +58,7 @@ proyectarNombresDeAmigosDe u ((x, y):xs) | u == x = y : proyectarNombresDeAmigos
                                          | u == y = x : proyectarNombresDeAmigosDe u xs
                                          | otherwise = proyectarNombresDeAmigosDe u xs
 
--- describir qué hace la función: .....
+-- Devuelve la cantidad de amigos del usuario dado en la red social dada.
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos r u = contarAmigosDe (relaciones r) u
 
@@ -67,7 +68,7 @@ contarAmigosDe ((x, y):xs) u | u == x = 1 + contarAmigosDe xs u
                              | u == y = 1 + contarAmigosDe xs u
                              | otherwise = 0 + contarAmigosDe xs u
 
--- describir qué hace la función: .....
+-- Devuelve al usuario con más amigos, en la red social dada
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos r = proyectarUsuarioConMasAmigos (usuarios r) (relaciones r)
 
@@ -76,11 +77,11 @@ proyectarUsuarioConMasAmigos [x] _ = x
 proyectarUsuarioConMasAmigos (x:y:xs) r | contarAmigosDe r x >= contarAmigosDe r y = proyectarUsuarioConMasAmigos (x:xs) r
                                         | otherwise = proyectarUsuarioConMasAmigos (y:xs) r
                                 
--- describir qué hace la función: .....
+-- Devuelve "True" si existe un usuario, en la red social dada, que tenga más de 1000000 amigos. En otro caso, devuelve "False".
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 1000000
 
--- describir qué hace la función: .....
+-- Devuelve una lista con todas las publicaciones hechas por el usuario dado, en la red social dada
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
 publicacionesDe red u = auxiliarPublicacionesDe (publicaciones (red)) (u)
 
@@ -92,7 +93,7 @@ auxiliarPublicacionesDe (x:xs) u | usuarioDePublicacion (x) == u = (x) : auxilia
                                  | otherwise = auxiliarPublicacionesDe xs u
 
 
--- describir qué hace la función: .....
+-- Devuelve una lista con todas las publicaciones "likeadas" por el usuario dado, en la red social dada.
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
 publicacionesQueLeGustanA red u = auxiliarPublicacionesQueLeGustanA (publicaciones (red)) (u)
 
@@ -101,15 +102,15 @@ auxiliarPublicacionesQueLeGustanA :: [Publicacion] -> Usuario -> [Publicacion]
 auxiliarPublicacionesQueLeGustanA [] _ = []
 auxiliarPublicacionesQueLeGustanA (x:xs) u | pertenece (u) (likesDePublicacion (x)) = (x) : auxiliarPublicacionesQueLeGustanA xs u
                                            | otherwise = auxiliarPublicacionesQueLeGustanA xs u
--- OBS temporal: auxiliarPublicacionesDe y auxiliarPublicacionesQueLeGustanA tienen el mismo código cambiando la función que útilizan
+-- OBS temporal: auxiliarPublicacionesDe y auxiliarPublicacionesQueLeGustanA tienen el mismo código cambiando la función que utilizan
 
 
--- describir qué hace la función: .....
+-- Si ambos usuarios dados, en la red social dada, le dieron "like" a las mismas publicaciones, devuelve "True". Si no, devuelve "False".
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
 lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA (red) (u1)) (publicacionesQueLeGustanA (red) (u2))
 
 
--- describir qué hace la función: .....
+-- Dado un usuario, si este ha hecho publicaciones en la red social dada y existe algún otro usuario que le haya dado "like" a todas ellas, devuelve "True". En otro caso, devuelve "False".
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
 tieneUnSeguidorFiel r u = if (publicacionesDe r u) /= [] then auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (usuarios r) else False
 
@@ -120,24 +121,39 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 
 
--- describir qué hace la función: .....
+-- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos r u1 u2 = existeSecuenciaDeAmigosAuxiliar (relaciones r) u1 u2 (amigosDe r u1)
 
 existeSecuenciaDeAmigosAuxiliar :: [Relacion] -> Usuario -> Usuario -> [Usuario]-> Bool
 existeSecuenciaDeAmigosAuxiliar _ _ _ [] = False
-existeSecuenciaDeAmigosAuxiliar r u u2 (f:fs)| sonAmigos r u u2 = True 
-                                           | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe r u) f u2 (fs ++ (proyectarNombresDeAmigosDe f r))
+existeSecuenciaDeAmigosAuxiliar r u u2 (f:fs) | sonAmigos r u u2 = True 
+                                              | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe r u) f u2 (fs ++ (proyectarNombresDeAmigosDe f r))
 
 eliminarRelacionesDe :: [Relacion] -> Usuario -> [Relacion]
 eliminarRelacionesDe [] _ = []
 eliminarRelacionesDe (r:rs) u | estaEnRelacion u r = eliminarRelacionesDe rs u
-                            | otherwise = r : eliminarRelacionesDe rs u
+                              | otherwise = r : eliminarRelacionesDe rs u
 
 sonAmigos :: [Relacion] -> Usuario -> Usuario -> Bool
 sonAmigos [] _ _ = False
 sonAmigos (r:rs) u u2 | estaEnRelacion u r && estaEnRelacion u2 r = True
                       | otherwise = sonAmigos rs u u2
+-- Idea:
+{-
+existeSecuenciaDeAmigos red u1 u2
+    | u1 se relaciona con u2 = True                                                                                 -- O sea, (u1, u2) existe
+    | (relaciones de u1) se relaciona con u2 = True
+    | otherwise = existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u1 u2
+
+existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Usuario -> Bool
+existeSecuenciaDeAmigosAux red u1 uX u2
+    | longitud (amigosDeAQueNoSeanBOCadenaDeAmigosDeB uX u1) == 0 = False
+    | uX se relaciona con u2 = True                                                                                 -- O sea, (uX, u2) existe
+    | otherwise = existeSecuenciaDeAmigosAux red u1 (Todos los uY tales que Relaciones (uX, uY) existen) u2
+    
+amigosDeAQueNoSeanBOCadenaDeAmigosDeB :: ...
+-}
 
 
 -- Funciones varias
