@@ -41,7 +41,7 @@ nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios x = proyectarNombres(usuarios x)
 
 proyectarNombres :: [Usuario] -> [String]
--- Proyectar nombres sin repetidos.
+-- Proyecta nombres sin repetidos.
 proyectarNombres us = eliminarRepetidos (proyectarNombresConRepetidos (us))
 
 proyectarNombresConRepetidos :: [Usuario] -> [String]
@@ -68,7 +68,7 @@ contarAmigosDe ((x, y):xs) u | u == x = 1 + contarAmigosDe xs u
                              | u == y = 1 + contarAmigosDe xs u
                              | otherwise = 0 + contarAmigosDe xs u
 
--- Devuelve al usuario con más amigos, en la red social dada
+-- Devuelve al usuario con más amigos, en la red social dada.
 usuarioConMasAmigos :: RedSocial -> Usuario
 usuarioConMasAmigos r = proyectarUsuarioConMasAmigos (usuarios r) (relaciones r)
 
@@ -81,7 +81,7 @@ proyectarUsuarioConMasAmigos (x:y:xs) r | contarAmigosDe r x >= contarAmigosDe r
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 1000000
 
--- Devuelve una lista con todas las publicaciones hechas por el usuario dado, en la red social dada
+-- Devuelve una lista con todas las publicaciones hechas por el usuario dado, en la red social dada.
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
 publicacionesDe red u = auxiliarPublicacionesDe (publicaciones (red)) (u)
 
@@ -121,7 +121,7 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 
 
--- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
+-- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "False".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
 existeSecuenciaDeAmigos r u1 u2 = existeSecuenciaDeAmigosAuxiliar (relaciones r) u1 u2 (amigosDe r u1)
 
@@ -172,7 +172,7 @@ eliminarRepetidos s | todosDistintos s = s
 eliminarRepetidos (x:xs) = (x) : (if pertenece x xs then (eliminarRepetidos (quitarTodos x xs)) else (eliminarRepetidos xs))
 
 eliminarNoRepetidos :: (Eq t) => [t] -> [t]
--- Funcion elimina elementos no repetidos en caso de estar repetido quedaran n-1 repeticiones. [1,1,1] -> [1,1]
+-- La función elimina elementos no repetidos. En caso de estar repetidos, quedarán n-1 repeticiones. [1,1,1] -> [1,1]
 -- Requiere: True
 eliminarNoRepetidos s | todosDistintos s = []
 eliminarNoRepetidos (x:xs) = (if not(pertenece x xs) then (eliminarNoRepetidos xs) else (x : eliminarNoRepetidos xs))
@@ -189,7 +189,7 @@ todosDistintos (x:xs) = (not (pertenece x xs)) && (todosDistintos xs)
 
 esContenido :: (Eq t) => [t] -> [t] -> Bool
 -- Requiere: True
--- Quiero ver que a contenido en b. o sea cada elemento de a esta también en b.
+-- Quiero ver que a esté contenido en b, o sea, que cada elemento de a esté también en b.
 esContenido [] b = True
 esContenido (x:xs) b = if pertenece x b then esContenido xs b else False
 
