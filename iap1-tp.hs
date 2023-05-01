@@ -123,37 +123,26 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 -- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigos r u1 u2 = existeSecuenciaDeAmigosAuxiliar (relaciones r) u1 u2 (amigosDe r u1)
+existeSecuenciaDeAmigos red u1 u2 = auxiliarExisteSecuenciaDeAmigos red [u1] u2 []
 
-existeSecuenciaDeAmigosAuxiliar :: [Relacion] -> Usuario -> Usuario -> [Usuario]-> Bool
-existeSecuenciaDeAmigosAuxiliar _ _ _ [] = False
-existeSecuenciaDeAmigosAuxiliar r u u2 (f:fs) | sonAmigos r u u2 = True 
-                                              | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe r u) f u2 (fs ++ (proyectarNombresDeAmigosDe f r))
+-- PRIMER PASO: RAMIFICAR LOS AMIGOS DE LOS AMIGOS. (AMIGOS DE AMIGOS)
+amigosDeUsuariosConRepetidos :: RedSocial -> [Usuario] -> [Usuario]
+-- Toma una red social y una lista de usuarios. Devuelve una lista con todos los amigos de la lista de usuarios. (Tiene repertidos)
+-- o sea Devuelve una lista con todos los usuarios que son amigos con al menos un usuario de la lista
+amigosDeUsuariosConRepetidos _ [] = []
+amigosDeUsuariosConRepetidos red (x:xs) = (amigosDe (red) (x)) ++ (amigosDeUsuariosConRepetidos (red) (xs))
 
-eliminarRelacionesDe :: [Relacion] -> Usuario -> [Relacion]
-eliminarRelacionesDe [] _ = []
-eliminarRelacionesDe (r:rs) u | estaEnRelacion u r = eliminarRelacionesDe rs u
-                              | otherwise = r : eliminarRelacionesDe rs u
+-- SEGUNDO PASO: LE SACO LOS REPETIDOS.
+amigosDeUsuarios :: RedSocial -> [Usuario] -> [Usuario]
+-- Toma una red social y una lista de usuarios. Devuelve una lista con todos los usuarios que son amigos con al menos un usuario de la lista. (Sin repeticiones)
+amigosDeUsuarios red us = eliminarRepetidos(amigosDeUsuariosConRepetidos red us)
 
-sonAmigos :: [Relacion] -> Usuario -> Usuario -> Bool
-sonAmigos [] _ _ = False
-sonAmigos (r:rs) u u2 | estaEnRelacion u r && estaEnRelacion u2 r = True
-                      | otherwise = sonAmigos rs u u2
--- Idea:
-{-
-existeSecuenciaDeAmigos red u1 u2
-    | u1 se relaciona con u2 = True                                                                                 -- O sea, (u1, u2) existe
-    | (relaciones de u1) se relaciona con u2 = True
-    | otherwise = existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u1 u2
-
-existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigosAux red u1 uX u2
-    | longitud (amigosDeAQueNoSeanBOCadenaDeAmigosDeB uX u1) == 0 = False
-    | uX se relaciona con u2 = True                                                                                 -- O sea, (uX, u2) existe
-    | otherwise = existeSecuenciaDeAmigosAux red u1 (Todos los uY tales que Relaciones (uX, uY) existen) u2
-    
-amigosDeAQueNoSeanBOCadenaDeAmigosDeB :: ...
--}
+-- TERCERO: Crear lista negra
+-- CUARTO PASO: lista blanca - lista negra
+auxiliarExisteSecuenciaDeAmigos :: RedSocial -> [Usuario] -> Usuario -> [Usuario] -> Bool
+auxiliarExisteSecuenciaDeAmigos red [] _ _ = False
+auxiliarExisteSecuenciaDeAmigos red us u_objetivo lista_negra | pertenece (u_objetivo) (us) = True 
+        | otherwise = auxiliarExisteSecuenciaDeAmigos (red) (restaListas (amigosDeUsuarios (red) (us)) (lista_negra)) (u_objetivo) (lista_negra ++ us)
 
 
 -- Funciones varias
@@ -196,3 +185,14 @@ esContenido (x:xs) b = if pertenece x b then esContenido xs b else False
 mismosElementos :: (Eq t) => [t] -> [t] -> Bool
 -- Requiere: True
 mismosElementos s r = (esContenido s r) && (esContenido r s)
+
+
+restaListas :: (Eq t) => [t] -> [t] -> [t]
+-- Requiere: True
+-- A - B = x pertenecientes a A y x no pertenece a b.
+-- OBS: Elimina todos los elementos que estan en a y b.
+-- Devuelve el resultado restante en el orden en el que aparecian los elementos en A. 
+restaListas [] _ = []
+restaListas (x:xs) lista_b | pertenece x lista_b = restaListas xs lista_b
+                           | otherwise = x : restaListas xs lista_b
+
