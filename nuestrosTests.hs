@@ -3,7 +3,7 @@ import Solucion
 
 -- Casos de Test
 
-run = run1 ++ run2 ++ run3 ++ run4 ++ run5 ++ run6 ++ run7 ++ run8 ++ run9 ++ run10
+main = run1 ++ run2 ++ run3 ++ run4 ++ run5 ++ run6 ++ run7 ++ run8 ++ run9 ++ run10
 
 run1 = runTestTT testEjercicio1
 run2 = runTestTT testEjercicio2
