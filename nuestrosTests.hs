@@ -21,9 +21,9 @@ run10 = runTestTT testEjercicio10
 -- y para visualizar la sintaxis y formato que deben llevar los tests, no son del TP
 
 testEjercicio1 = test [
-    "Caso 1: Lista de usuarios vacía" ~: nombresDeUsuarios ()                ~?= [],
-    "Caso 2: Lista de usuarios con repetidos" ~: nombresDeUsuarios ()        ~?=   ,
-    "Caso 3: Lista de usuarios sin repetidos" ~: nombresDeUsuarios ()        ~?=   ,
+    "Caso 1: Lista de usuarios vacía" ~: nombresDeUsuarios 1                ~?= [],
+    "Caso 2: Lista de usuarios con repetidos" ~: nombresDeUsuarios 2        ~?=   ,
+    "Caso 3: Lista de usuarios sin repetidos" ~: nombresDeUsuarios 3        ~?=   ,
     ]
 
 testEjercicio2 = test [
@@ -36,14 +36,14 @@ testEjercicio2 = test [
 testEjercicio3 = test [
     "Caso 1: u no tiene amigos :(" ~:     ~?=   ,
     "Caso 2: u tiene un solo amigo" ~:        ~?=   ,
-    "Caso 3: u tiene más de un amigo (tiene una cantidad finita n de amigos)" ~:      ~?=     ,
+    "Caso 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:      ~?=     ,
 ]
 
 testEjercicio4 = test [
     "Caso 1: La red tiene un solo usuario y ninguna relación." ~:     ~?=   ,
     "Caso 2: La red tiene un único usuario u y una única relación: (u, u)" ~:        ~?=   ,
     "Caso 3: Dos usuarios tienen la misma cantidad de amigos" ~:      ~?=     ,
-    "Caso 4: Usuario con mayor estricto cantidad de amigos que el resto" ~:       ~?=    ,
+    "Caso 4: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~:       ~?=    ,
 ]
    
 testEjercicio5 = test [
@@ -53,19 +53,15 @@ testEjercicio5 = test [
 ]
    
 testEjercicio6 = test [
-    "Caso 1: Multiplos de 0" ~:     ~?=   ,
-    "Caso 2: Lista vacia" ~:        ~?=   ,
-    "Caso 3: Hay un solo multiplo" ~:      ~?=     ,
-    "Caso 4: No hay multiplos con n neg" ~:       ~?=    ,
-    "Caso 5: Hay mas de un multiplo con n neg" ~:        ~?=     ,
+    "Caso 1: u no tiene publicaciones" ~:     ~?=   ,
+    "Caso 2: u tiene una sola publicación" ~:        ~?=   ,
+    "Caso 3: u tiene más (mayor estricto) de una publicación" ~:      ~?=     ,
 ]
    
 testEjercicio7 = test [
-    "Caso 1: Multiplos de 0" ~:     ~?=   ,
-    "Caso 2: Lista vacia" ~:        ~?=   ,
-    "Caso 3: Hay un solo multiplo" ~:      ~?=     ,
-    "Caso 4: No hay multiplos con n neg" ~:       ~?=    ,
-    "Caso 5: Hay mas de un multiplo con n neg" ~:        ~?=     ,
+    "Caso 1: A u no le gusta ninguna publicación" ~:     ~?=   ,
+    "Caso 2: A u le gustan publicaciones repetidas (dos o más usuarios con una misma publicación)" ~:        ~?=   ,       -- Pendiente: formalizar la descripción de este caso
+    "Caso 3: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
 ]
    
 testEjercicio8 = test [
