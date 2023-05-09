@@ -29,9 +29,8 @@ testEjercicio1 = test [
 
 testEjercicio2 = test [
     "Caso 1: u no tiene amigos" ~:     ~?=   ,
-    "Caso 2: u es amigo de sí mismo" ~:        ~?=   ,
-    "Caso 3: u no tiene amigos con nombres repetidos" ~:      ~?=     ,
-    "Caso 4: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
+    "Caso 2: u no tiene amigos con nombres repetidos" ~:      ~?=     ,
+    "Caso 3: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
     ]
     
 testEjercicio3 = test [
