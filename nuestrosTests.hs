@@ -99,4 +99,8 @@ testEjercicio4 = test [
     "Caso 4: No hay multiplos con n neg" ~:       ~?=    ,
     "Caso 5: Hay mas de un multiplo con n neg" ~:        ~?=     ,
     ]
-   
+
+
+-- Corrige las comparaciones realizadas por los tests para que el orden en las n-uplas y listas no importe.
+-- Copypasteado de test-catedra.hs
+expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
