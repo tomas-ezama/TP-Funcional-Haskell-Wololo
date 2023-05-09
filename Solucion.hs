@@ -6,6 +6,8 @@
 -- Integrante 3: Mauricio Romero Laino, mauricioromerolaino@gmail.com, 18/23
 -- Integrante 4: Cian Andrés Bautista, andycia802@gmail.com, 937/21
 
+module Solucion where
+
 type Usuario = (Integer, String) -- (id, nombre)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
 type Publicacion = (Usuario, String, [Usuario]) -- (usuario que publica, texto publicacion, likes)
