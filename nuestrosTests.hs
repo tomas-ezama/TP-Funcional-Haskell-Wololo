@@ -19,6 +19,7 @@ run10 = runTestTT testEjercicio10
 
 -- Nota temporal, estos casos fueron sacados de la clase práctica a modo de ejemplo
 -- y para visualizar la sintaxis y formato que deben llevar los tests, no son del TP
+-- Esquema de los test suites: https://docs.google.com/spreadsheets/d/1ISs0Z0TMPZ_7Ro_69iO2XR96wovZvKPW/edit#gid=1370724871
 
 testEjercicio1 = test [
     "Caso 1: Lista de usuarios vacía" ~: nombresDeUsuarios 1                ~?= [],
@@ -29,8 +30,8 @@ testEjercicio1 = test [
 testEjercicio2 = test [
     "Caso 1: u no tiene amigos" ~:     ~?=   ,
     "Caso 2: u es amigo de sí mismo" ~:        ~?=   ,
-    "Caso 3: u tiene amigos repetidos" ~:      ~?=     ,
-    "Caso 4: u no tiene amigos repetidos" ~:       ~?=    ,
+    "Caso 3: u no tiene amigos con nombres repetidos" ~:      ~?=     ,
+    "Caso 4: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
     ]
     
 testEjercicio3 = test [
