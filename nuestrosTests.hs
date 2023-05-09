@@ -42,16 +42,14 @@ testEjercicio3 = test [
 testEjercicio4 = test [
     "Caso 1: La red tiene un solo usuario y ninguna relación." ~:     ~?=   ,
     "Caso 2: La red tiene un único usuario u y una única relación: (u, u)" ~:        ~?=   ,
-    "Caso 3: Dos usuarios con la misma cantidad de amigos" ~:      ~?=     ,
+    "Caso 3: Dos usuarios tienen la misma cantidad de amigos" ~:      ~?=     ,
     "Caso 4: Usuario con mayor estricto cantidad de amigos que el resto" ~:       ~?=    ,
 ]
    
 testEjercicio5 = test [
-    "Caso 1: Multiplos de 0" ~:     ~?=   ,
-    "Caso 2: Lista vacia" ~:        ~?=   ,
-    "Caso 3: Hay un solo multiplo" ~:      ~?=     ,
-    "Caso 4: No hay multiplos con n neg" ~:       ~?=    ,
-    "Caso 5: Hay mas de un multiplo con n neg" ~:        ~?=     ,
+    "Caso 1: cantidadDeAmigos > 1000000" ~:     ~?= True,
+    "Caso 2: cantidadDeAmigos = 1000000" ~:     ~?= False,
+    "Caso 3: cantidadDeAmigos < 1000000" ~:     ~?= False,
 ]
    
 testEjercicio6 = test [
