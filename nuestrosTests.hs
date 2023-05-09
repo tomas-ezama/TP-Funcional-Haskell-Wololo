@@ -73,11 +73,10 @@ testEjercicio8 = test [
 ]
    
 testEjercicio9 = test [
-    "Caso 1: Multiplos de 0" ~:     ~?=   ,
-    "Caso 2: Lista vacia" ~:        ~?=   ,
-    "Caso 3: Hay un solo multiplo" ~:      ~?=     ,
-    "Caso 4: No hay multiplos con n neg" ~:       ~?=    ,
-    "Caso 5: Hay mas de un multiplo con n neg" ~:        ~?=     ,
+    "Caso 1: u es el único usuario que existe en la red social" ~:     ~?= True,
+    "Caso 2: u no tiene publicaciones" ~:        ~?=   False,
+    "Caso 3: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
+    "Caso 4: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
 ]
    
 testEjercicio10 = test [
