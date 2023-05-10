@@ -28,7 +28,7 @@ testEjercicio1 = test [
     ]
 
 testEjercicio2 = test [
-    "Caso 1: u no tiene amigos" ~:     ~?=   ,
+    "Caso 1: u no tiene amigos" ~:     ~?= [],
     "Caso 2: u no tiene amigos con nombres repetidos" ~:      ~?=     ,
     "Caso 3: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
     ]
@@ -53,23 +53,23 @@ testEjercicio5 = test [
 ]
    
 testEjercicio6 = test [
-    "Caso 1: u no tiene publicaciones" ~:     ~?=   ,
+    "Caso 1: u no tiene publicaciones" ~:     ~?= [],
     "Caso 2: u tiene una sola publicación" ~:        ~?=   ,
     "Caso 3: u tiene más (mayor estricto) de una publicación" ~:      ~?=     ,
 ]
    
 testEjercicio7 = test [
-    "Caso 1: A u no le gusta ninguna publicación" ~:     ~?=   ,
+    "Caso 1: A u no le gusta ninguna publicación" ~:     ~?= [],
     "Caso 2: A u le gustan publicaciones repetidas (dos o más usuarios con una misma publicación)" ~:        ~?=   ,       -- Pendiente: formalizar la descripción de este caso
     "Caso 3: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
 ]
    
 testEjercicio8 = test [
-    "Caso 1: Multiplos de 0" ~:     ~?=   ,
-    "Caso 2: Lista vacia" ~:        ~?=   ,
-    "Caso 3: Hay un solo multiplo" ~:      ~?=     ,
-    "Caso 4: No hay multiplos con n neg" ~:       ~?=    ,
-    "Caso 5: Hay mas de un multiplo con n neg" ~:        ~?=     ,
+    "Caso 1: A ninguno de los dos usuarios les gusta ninguna publicación" ~:     ~?=   ,
+    "Caso 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?=   ,
+    "Caso 3: Les gustan las mismas publicaciones a ambos usuarios" ~:      ~?= True,
+    "Caso 4: NO les gustan las mismas publicaciones a ambos usuarios" ~:       ~?= False,
+    "Caso 5: Los dos usuarios son el mismo (u1 = u2)" ~:        ~?= True,
 ]
    
 testEjercicio9 = test [
