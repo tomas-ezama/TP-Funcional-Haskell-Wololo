@@ -34,9 +34,9 @@ testEjercicio2 = test [
     ]
     
 testEjercicio3 = test [
-    "Caso 1: u no tiene amigos :(" ~:     ~?=   ,
-    "Caso 2: u tiene un solo amigo" ~:        ~?=   ,
-    "Caso 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:      ~?=     ,
+    "Caso 1: u no tiene amigos :(" ~:     ~?= 0,
+    "Caso 2: u tiene un solo amigo" ~:        ~?= 1,
+    "Caso 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:      ~?= ,
 ]
 
 testEjercicio4 = test [
