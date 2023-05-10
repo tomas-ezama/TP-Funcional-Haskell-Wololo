@@ -80,11 +80,10 @@ testEjercicio9 = test [
 ]
    
 testEjercicio10 = test [
-    "Caso 1: Multiplos de 0" ~:     ~?=   ,
-    "Caso 2: Lista vacia" ~:        ~?=   ,
-    "Caso 3: Hay un solo multiplo" ~:      ~?=     ,
-    "Caso 4: No hay multiplos con n neg" ~:       ~?=    ,
-    "Caso 5: Hay mas de un multiplo con n neg" ~:        ~?=     ,
+    "Caso 1: u1 = u2" ~:     ~?=   ,
+    "Caso 2: u1 y u2 son amigos" ~:        ~?= True,
+    "Caso 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:      ~?= True,
+    "Caso 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:       ~?= False,
 ]
 
 
