@@ -22,68 +22,68 @@ run10 = runTestTT testEjercicio10
 -- Esquema de los test suites: https://docs.google.com/spreadsheets/d/1ISs0Z0TMPZ_7Ro_69iO2XR96wovZvKPW/edit#gid=1370724871
 
 testEjercicio1 = test [
-    "Caso 1: Lista de usuarios vacía" ~: nombresDeUsuarios 1                ~?= [],
-    "Caso 2: Lista de usuarios con repetidos" ~: nombresDeUsuarios 2        ~?=   ,
-    "Caso 3: Lista de usuarios sin repetidos" ~: nombresDeUsuarios 3        ~?=   ,
+    "nombresDeUsuarios 1: Lista de usuarios vacía" ~:              ~?= [],
+    "nombresDeUsuarios 2: Lista de usuarios con repetidos" ~:         ~?=   ,
+    "nombresDeUsuarios 3: Lista de usuarios sin repetidos" ~:         ~?=   ,
     ]
 
 testEjercicio2 = test [
-    "Caso 1: u no tiene amigos" ~:     ~?= [],
-    "Caso 2: u no tiene amigos con nombres repetidos" ~:      ~?=     ,
-    "Caso 3: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
+    "amigosDe 1: u no tiene amigos" ~:     ~?= [],
+    "amigosDe 2: u no tiene amigos con nombres repetidos" ~:      ~?=     ,
+    "amigosDe 3: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
     ]
     
 testEjercicio3 = test [
-    "Caso 1: u no tiene amigos :(" ~:     ~?= 0,
-    "Caso 2: u tiene un solo amigo" ~:        ~?= 1,
-    "Caso 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:      ~?= ,
+    "cantidadDeAmigos 1: u no tiene amigos :(" ~:     ~?= 0,
+    "cantidadDeAmigos 2: u tiene un solo amigo" ~:        ~?= 1,
+    "cantidadDeAmigos 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:      ~?= ,
 ]
 
 testEjercicio4 = test [
-    "Caso 1: La red tiene un solo usuario y ninguna relación." ~:     ~?=   ,
-    "Caso 2: La red tiene un único usuario u y una única relación: (u, u)" ~:        ~?=   ,
-    "Caso 3: Dos usuarios tienen la misma cantidad de amigos" ~:      ~?=     ,
-    "Caso 4: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~:       ~?=    ,
+    "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~:     ~?=   ,
+    "usuarioConMasAmigos 2: La red tiene un único usuario u y una única relación: (u, u)" ~:        ~?=   ,
+    "usuarioConMasAmigos 3: Dos usuarios tienen la misma cantidad de amigos" ~:      ~?=     ,
+    "usuarioConMasAmigos 4: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~:       ~?=    ,
 ]
    
 testEjercicio5 = test [
-    "Caso 1: cantidadDeAmigos > 1000000" ~:     ~?= True,
-    "Caso 2: cantidadDeAmigos = 1000000" ~:     ~?= False,
-    "Caso 3: cantidadDeAmigos < 1000000" ~:     ~?= False,
+    "estaRobertoCarlos 1: cantidadDeAmigos > 1000000" ~:     ~?= True,
+    "estaRobertoCarlos 2: cantidadDeAmigos = 1000000" ~:     ~?= False,
+    "estaRobertoCarlos 3: cantidadDeAmigos < 1000000" ~:     ~?= False,
 ]
    
 testEjercicio6 = test [
-    "Caso 1: u no tiene publicaciones" ~:     ~?= [],
-    "Caso 2: u tiene una sola publicación" ~:        ~?=   ,
-    "Caso 3: u tiene más (mayor estricto) de una publicación" ~:      ~?=     ,
+    "publicacionesDe 1: u no tiene publicaciones" ~:     ~?= [],
+    "publicacionesDe 2: u tiene una sola publicación" ~:        ~?=   ,
+    "publicacionesDe 3: u tiene más (mayor estricto) de una publicación" ~:      ~?=     ,
 ]
    
 testEjercicio7 = test [
-    "Caso 1: A u no le gusta ninguna publicación" ~:     ~?= [],
-    "Caso 2: A u le gustan publicaciones repetidas (dos o más usuarios con una misma publicación)" ~:        ~?=   ,       -- Pendiente: formalizar la descripción de este caso
-    "Caso 3: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
+    "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación" ~:     ~?= [],
+    "publicacionesQueLeGustanA 2: A u le gustan publicaciones repetidas (dos o más usuarios con una misma publicación)" ~:        ~?=   ,       -- Pendiente: formalizar la descripción de este caso
+    "publicacionesQueLeGustanA 3: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
 ]
    
 testEjercicio8 = test [
-    "Caso 1: A ninguno de los dos usuarios les gusta ninguna publicación" ~:     ~?=   ,
-    "Caso 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?=   ,
-    "Caso 3: Les gustan las mismas publicaciones a ambos usuarios" ~:      ~?= True,
-    "Caso 4: NO les gustan las mismas publicaciones a ambos usuarios" ~:       ~?= False,
-    "Caso 5: Los dos usuarios son el mismo (u1 = u2)" ~:        ~?= True,
+    "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación" ~:     ~?=   ,
+    "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?=   ,
+    "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios" ~:      ~?= True,
+    "lesGustanLasMismasPublicaciones 4: NO les gustan las mismas publicaciones a ambos usuarios" ~:       ~?= False,
+    "lesGustanLasMismasPublicaciones 5: Los dos usuarios son el mismo (u1 = u2)" ~:        ~?= True,
 ]
    
 testEjercicio9 = test [
-    "Caso 1: u es el único usuario que existe en la red social" ~:     ~?= True,
-    "Caso 2: u no tiene publicaciones" ~:        ~?=   False,
-    "Caso 3: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
-    "Caso 4: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
+    "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~:     ~?= True,
+    "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~:        ~?=   False,
+    "tieneUnSeguidorFiel 3: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
+    "tieneUnSeguidorFiel 4: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
 ]
    
 testEjercicio10 = test [
-    "Caso 1: u1 = u2" ~:     ~?=   ,
-    "Caso 2: u1 y u2 son amigos" ~:        ~?= True,
-    "Caso 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:      ~?= True,
-    "Caso 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:       ~?= False,
+    "existeSecuenciaDeAmigos 1: u1 = u2" ~:     ~?=   ,
+    "existeSecuenciaDeAmigos 2: u1 y u2 son amigos" ~:        ~?= True,
+    "existeSecuenciaDeAmigos 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:      ~?= True,
+    "existeSecuenciaDeAmigos 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:       ~?= False,
 ]
 
 
