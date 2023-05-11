@@ -60,7 +60,7 @@ testEjercicio6 = test [
    
 testEjercicio7 = test [
     "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación" ~:     ~?= [],
-    "publicacionesQueLeGustanA 2: A u le gustan publicaciones repetidas (dos o más usuarios con una misma publicación)" ~:        ~?=   ,       -- Pendiente: formalizar la descripción de este caso
+    "publicacionesQueLeGustanA 2: A u le gustan 2 o más publicaciones tales que: pub = (_,x,_)" ~:        ~?=   ,                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
     "publicacionesQueLeGustanA 3: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
 ]
    
