@@ -29,7 +29,7 @@ testEjercicio1 = test [
 
 testEjercicio2 = test [
     "amigosDe 1: u no tiene amigos" ~:     ~?= [],
-    "amigosDe 2: u no tiene amigos con nombres repetidos" ~:      ~?=     ,
+    "amigosDe 2: u tiene amigos con nombres repetidos ∧ IDs distintos" ~:      ~?=     ,
     "amigosDe 3: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
     ]
     
