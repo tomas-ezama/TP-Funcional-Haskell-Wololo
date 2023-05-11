@@ -60,7 +60,7 @@ testEjercicio6 = test [
    
 testEjercicio7 = test [
     "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación" ~:     ~?= [],
-    "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n[2]) ∧ (pub_n[2] = pub_n-1[2])" ~:        ~?=   ,                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
+    "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n[1]) ∧ (pub_n[1] = pub_n-1[1])" ~:        ~?=   ,                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
     "publicacionesQueLeGustanA 3: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
 ]
    
