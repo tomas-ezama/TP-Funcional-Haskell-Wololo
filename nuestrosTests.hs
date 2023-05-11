@@ -65,8 +65,8 @@ testEjercicio7 = test [
 ]
    
 testEjercicio8 = test [
-    "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación" ~:     ~?=   ,
-    "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?=   ,
+    "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación" ~:     ~?= True,
+    "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?= False,
     "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios" ~:      ~?= True,
     "lesGustanLasMismasPublicaciones 4: NO les gustan las mismas publicaciones a ambos usuarios" ~:       ~?= False,
     "lesGustanLasMismasPublicaciones 5: Los dos usuarios son el mismo (u1 = u2)" ~:        ~?= True,
