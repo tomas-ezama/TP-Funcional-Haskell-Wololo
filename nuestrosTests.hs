@@ -60,7 +60,7 @@ testEjercicio6 = test [
    
 testEjercicio7 = test [
     "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación" ~:     ~?= [],
-    "publicacionesQueLeGustanA 2: A u le gustan 2 o más publicaciones tales que: pub = (_,x,_)" ~:        ~?=   ,                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
+    "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n_2) ∧ (pub_n_2 = pub_n-1_2)" ~:        ~?=   ,                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
     "publicacionesQueLeGustanA 3: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
 ]
    
@@ -75,8 +75,8 @@ testEjercicio8 = test [
 testEjercicio9 = test [
     "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~:     ~?= True,
     "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~:        ~?=   False,
-    "tieneUnSeguidorFiel 3: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
-    "tieneUnSeguidorFiel 4: (∃u2 : Usuario)(Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion)(Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
+    "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
+    "tieneUnSeguidorFiel 4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
 ]
    
 testEjercicio10 = test [
