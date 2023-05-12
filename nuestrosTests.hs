@@ -62,7 +62,7 @@ testEjercicio7 = test [
     "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación" ~:     ~?= [],
     "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n[1]) ∧ (pub_n[1] = pub_n-1[1])" ~:        ~?=   ,                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
     "publicacionesQueLeGustanA 3: Hay publicaciones con un mismo autor que le gustan a u" ~:      ~?=     ,
-   -- "publicacionesQueLeGustanA 4: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
+   -- DEPRECATED: "publicacionesQueLeGustanA 4: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?=     ,
 ]
    
 testEjercicio8 = test [
@@ -79,7 +79,7 @@ testEjercicio9 = test [
     "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~:     ~?= False,
     "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~:        ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
-    -- "tieneUnSeguidorFiel 4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
+    -- DEPRECATED: "tieneUnSeguidorFiel 4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
     "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~:        ~?=   False,
     "tieneUnSeguidorFiel 5: Existe un usuario u2 al que le gustan algunas publicaciones de u, y tambièn le gustan otras publicaciones de otros usuarios (distintos a u y u2)" ~:        ~?=   False,
 ]
