@@ -107,7 +107,7 @@ u3 = (3, "Andy")
 u4 = (4, "ForeverAlone")
 
 rel1_2 = (u1, u2)
-rel2_3 = (u1, u3)
+rel2_3 = (u2, u3)
 
 pub1_1 = (usuario1, "Tres", [usuario2, usuario3])
 pub1_2 = (usuario1, "Tristes", [usuario3])
@@ -123,12 +123,5 @@ pub3_3 = (usuario3, "Trigal", [])
 
 
 
-usuariosA = [usuario1, usuario2, usuario3, usuario4]
-relacionesA = [relacion1_2, relacion1_4, relacion2_3, relacion2_4, relacion3_4]
-publicacionesA = [publicacion1_1, publicacion1_2, publicacion2_1, publicacion2_2, publicacion3_1, publicacion3_2, publicacion4_1, publicacion4_2]
-redA = (usuariosA, relacionesA, publicacionesA)
-
-usuariosB = [usuario1, usuario2, usuario3, usuario5]
-relacionesB = [relacion1_2, relacion2_3]
-publicacionesB = [publicacion1_3, publicacion1_4, publicacion1_5, publicacion3_1, publicacion3_2, publicacion3_3]
-redB = (usuariosB, relacionesB, publicacionesB)
+redA = ([Tomi, Mauri, Andy], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
+redB = ([ForeverAlone], [], [])
