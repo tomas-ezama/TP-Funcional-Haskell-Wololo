@@ -24,19 +24,19 @@ run10 = runTestTT testEjercicio10
 testEjercicio1 = test [
     "nombresDeUsuarios 1: Lista de usuarios vacía"         ~: ([],[],[])                 ~?= [],
     "nombresDeUsuarios 2: Lista de usuarios con repetidos" ~: (["u2", "u3", "u2"],[],[]) ~?= ["Mauri", "Andy"],
-    "nombresDeUsuarios 3: Lista de usuarios sin repetidos" ~: (["u2", "u3", "u1"],[],[]) ~?= ["Mauri", "Andy", "Tomi"],
+    "nombresDeUsuarios 3: Lista de usuarios sin repetidos" ~: redA                       ~?= ["Tomi", "Mauri", "Andy"],
     ]
 
 testEjercicio2 = test [
-    "amigosDe 1: u no tiene amigos" ~:     ~?= [],
-    "amigosDe 2: u tiene amigos con nombres repetidos ∧ IDs distintos" ~:      ~?=     ,
-    "amigosDe 3: u no tiene amigos con nombres repetidos" ~:       ~?=    ,
+    "amigosDe 1: u no tiene amigos" ~: redB ForeverAlone                  ~?= [],
+    "amigosDe 2: u tiene amigos CON nombres repetidos ∧ IDs distintos" ~: ([(1, "Tomi"), (2, "u"), (727, "Tomi")],[(2, u), (1,"Tomi")],[(2, u), (727,"Tomi")], []) ~?= [(1, "Tomi"),(727, "Tomi")],
+    "amigosDe 3: u tiene amigos, pero SIN nombres repetidos" ~: redA Andy ~?= [2, "Mauri"],
     ]
     
 testEjercicio3 = test [
-    "cantidadDeAmigos 1: u no tiene amigos :(" ~:     ~?= 0,
-    "cantidadDeAmigos 2: u tiene un solo amigo" ~:        ~?= 1,
-    "cantidadDeAmigos 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:      ~?= ,
+    "cantidadDeAmigos 1: u no tiene amigos :(" ~: redB ForeverAlone ~?= 0,
+    "cantidadDeAmigos 2: u tiene un solo amigo" ~: redA Tomi        ~?= 1,
+    "cantidadDeAmigos 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:  ~?= n,
 ]
 
 testEjercicio4 = test [
