@@ -28,22 +28,21 @@ testEjercicio1 = test [
     ]
 
 testEjercicio2 = test [
-    "amigosDe 1: u no tiene amigos" ~: redB ForeverAlone                  ~?= [],
+    "amigosDe 1: u no tiene amigos" ~: redB u4 ~?= [],
     "amigosDe 2: u tiene amigos CON nombres repetidos ∧ IDs distintos" ~: ([(1, "Tomi"), (2, "u"), (727, "Tomi")],[(2, u), (1,"Tomi")],[(2, u), (727,"Tomi")], []) ~?= [(1, "Tomi"),(727, "Tomi")],
-    "amigosDe 3: u tiene amigos, pero SIN nombres repetidos" ~: redA Andy ~?= [2, "Mauri"],
+    "amigosDe 3: u tiene amigos, pero SIN nombres repetidos" ~: redA u3 ~?= [2, "Mauri"],
     ]
     
 testEjercicio3 = test [
-    "cantidadDeAmigos 1: u no tiene amigos :(" ~: redB ForeverAlone ~?= 0,
-    "cantidadDeAmigos 2: u tiene un solo amigo" ~: redA Tomi        ~?= 1,
-    "cantidadDeAmigos 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~:  ~?= n,
+    "cantidadDeAmigos 1: u no tiene amigos :("                                                             ~: redB u4 ~?= 0,
+    "cantidadDeAmigos 2: u tiene un solo amigo"                                                            ~: redA u1 ~?= 1,
+    "cantidadDeAmigos 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~: redA u2 ~?= 2,
 ]
 
 testEjercicio4 = test [
-    "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~:     ~?=   ,
-    "usuarioConMasAmigos 2: La red tiene un único usuario u y una única relación: (u, u)" ~:        ~?=   ,
-    "usuarioConMasAmigos 3: Dos usuarios tienen la misma cantidad de amigos" ~:      ~?=     ,
-    "usuarioConMasAmigos 4: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~:       ~?=    ,
+    "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~: redB     ~?= u4,
+    "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: redC     ~?= u1 || u2 || u3,
+    "usuarioConMasAmigos 3: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~: redA ~?= u2,
 ]
    
 testEjercicio5 = test [
@@ -125,3 +124,4 @@ pub3_3 = (u3, "Trigal", [])
 
 redA = ([Tomi, Mauri, Andy], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
 redB = ([ForeverAlone], [], [])
+redC = ([Tomi, Mauri, Andy], [rel1_2, rel1_3, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
