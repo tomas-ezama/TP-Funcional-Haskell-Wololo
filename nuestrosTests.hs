@@ -22,9 +22,9 @@ run10 = runTestTT testEjercicio10
 -- Esquema de los test suites: https://docs.google.com/spreadsheets/d/1ISs0Z0TMPZ_7Ro_69iO2XR96wovZvKPW/edit#gid=1370724871
 
 testEjercicio1 = test [
-    "nombresDeUsuarios 1: Lista de usuarios vacía" ~:              ~?= [],
-    "nombresDeUsuarios 2: Lista de usuarios con repetidos" ~:         ~?=   ,
-    "nombresDeUsuarios 3: Lista de usuarios sin repetidos" ~:         ~?=   ,
+    "nombresDeUsuarios 1: Lista de usuarios vacía"         ~: ([],[],[])                 ~?= [],
+    "nombresDeUsuarios 2: Lista de usuarios con repetidos" ~: (["u2", "u3", "u2"],[],[]) ~?= ["Mauri", "Andy"],
+    "nombresDeUsuarios 3: Lista de usuarios sin repetidos" ~: (["u2", "u3", "u1"],[],[]) ~?= ["Mauri", "Andy", "Tomi"],
     ]
 
 testEjercicio2 = test [
@@ -109,16 +109,16 @@ u4 = (4, "ForeverAlone")
 rel1_2 = (u1, u2)
 rel2_3 = (u2, u3)
 
-pub1_1 = (usuario1, "Tres", [usuario2, usuario3])
-pub1_2 = (usuario1, "Tristes", [usuario3])
-pub1_3 = (usuario1, "Tigres", [])
+pub1_1 = (u1, "Tres", [u2, u3])
+pub1_2 = (u1, "Tristes", [u3])
+pub1_3 = (u1, "Tigres", [])
 
-pub2_1 = (usuario2, "Comían", [usuario1])
-pub2_2 = (usuario2, "Trigo", [usuario1, usuario3])
+pub2_1 = (u2, "Comían", [u1])
+pub2_2 = (u2, "Trigo", [u1, u3])
 
-pub3_1 = (usuario3, "En", [])
-pub3_2 = (usuario3, "Un", [])
-pub3_3 = (usuario3, "Trigal", [])
+pub3_1 = (u3, "En", [])
+pub3_2 = (u3, "Un", [])
+pub3_3 = (u3, "Trigal", [])
 
 
 
