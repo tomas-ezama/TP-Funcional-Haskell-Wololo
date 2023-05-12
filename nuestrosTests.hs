@@ -69,7 +69,7 @@ testEjercicio8 = test [
     "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación" ~:     ~?= True,
     "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?= False,
     "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios" ~:      ~?= True,
-    "lesGustanLasMismasPublicaciones 4: Hay algunos likes en comùn entre ambos usuarios" ~:      ~?= False,
+    "lesGustanLasMismasPublicaciones 4: Hay algunos (pero no todos) likes en comùn entre ambos usuarios" ~:      ~?= False,
     "lesGustanLasMismasPublicaciones 4: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales)" ~:      ~?= False,
     "lesGustanLasMismasPublicaciones 6: NO hay likes en comùn entre ambos usuarios" ~:       ~?= False,
     "lesGustanLasMismasPublicaciones 7: Los dos usuarios son el mismo (u1 = u2)" ~:        ~?= True,
@@ -79,7 +79,9 @@ testEjercicio9 = test [
     "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~:     ~?= False,
     "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~:        ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
-    "tieneUnSeguidorFiel 4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
+    -- "tieneUnSeguidorFiel 4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
+    "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~:        ~?=   False,
+    "tieneUnSeguidorFiel 5: Existe un usuario u2 al que le gustan algunas publicaciones de u, y tambièn le gustan otras publicaciones de otros usuarios (distintos a u y u2)" ~:        ~?=   False,
 ]
    
 testEjercicio10 = test [
