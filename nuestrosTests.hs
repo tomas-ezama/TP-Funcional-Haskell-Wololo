@@ -95,3 +95,40 @@ testEjercicio10 = test [
 -- Corrige las comparaciones realizadas por los tests para que el orden en las n-uplas y listas no importe.
 -- Copypasteado de test-catedra.hs
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
+
+
+
+
+-- Redes sociales y demás, a modo de ejemplo:
+
+u1 = (1, "Tomi")
+u2 = (2, "Mauri")
+u3 = (3, "Andy")
+u4 = (4, "ForeverAlone")
+
+rel1_2 = (u1, u2)
+rel2_3 = (u1, u3)
+
+pub1_1 = (usuario1, "Tres", [usuario2, usuario3])
+pub1_2 = (usuario1, "Tristes", [usuario3])
+pub1_3 = (usuario1, "Tigres", [])
+
+pub2_1 = (usuario2, "Comían", [usuario1])
+pub2_2 = (usuario2, "Trigo", [usuario1, usuario3])
+
+pub3_1 = (usuario3, "En", [])
+pub3_2 = (usuario3, "Un", [])
+pub3_3 = (usuario3, "Trigal", [])
+
+
+
+
+usuariosA = [usuario1, usuario2, usuario3, usuario4]
+relacionesA = [relacion1_2, relacion1_4, relacion2_3, relacion2_4, relacion3_4]
+publicacionesA = [publicacion1_1, publicacion1_2, publicacion2_1, publicacion2_2, publicacion3_1, publicacion3_2, publicacion4_1, publicacion4_2]
+redA = (usuariosA, relacionesA, publicacionesA)
+
+usuariosB = [usuario1, usuario2, usuario3, usuario5]
+relacionesB = [relacion1_2, relacion2_3]
+publicacionesB = [publicacion1_3, publicacion1_4, publicacion1_5, publicacion3_1, publicacion3_2, publicacion3_3]
+redB = (usuariosB, relacionesB, publicacionesB)
