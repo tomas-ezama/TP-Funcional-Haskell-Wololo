@@ -74,7 +74,7 @@ testEjercicio8 = test [
 ]
    
 testEjercicio9 = test [
-    "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~:     ~?= True,
+    "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~:     ~?= False,
     "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~:        ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
     "tieneUnSeguidorFiel 4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
