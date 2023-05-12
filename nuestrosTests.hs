@@ -52,9 +52,9 @@ testEjercicio5 = test [
 ]
    
 testEjercicio6 = test [
-    "publicacionesDe 1: u no tiene publicaciones" ~:     ~?= [],
-    "publicacionesDe 2: u tiene una sola publicación" ~:        ~?=   ,
-    "publicacionesDe 3: u tiene más (mayor estricto) de una publicación" ~:      ~?=     ,
+    "publicacionesDe 1: u no tiene publicaciones"                        ~: redB u4 ~?= [],
+    "publicacionesDe 2: u tiene una sola publicación"                    ~: redC u1 ~?= [pub1_1],
+    "publicacionesDe 3: u tiene más (mayor estricto) de una publicación" ~: redA u3 ~?= [pub3_1, pub3_2, pub3_3],
 ]
    
 testEjercicio7 = test [
@@ -124,4 +124,4 @@ pub3_3 = (u3, "Trigal", [])
 
 redA = ([Tomi, Mauri, Andy], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
 redB = ([ForeverAlone], [], [])
-redC = ([Tomi, Mauri, Andy], [rel1_2, rel1_3, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
+redC = ([Tomi, Mauri, Andy], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
