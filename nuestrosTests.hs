@@ -70,7 +70,7 @@ testEjercicio8 = test [
     "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?= False,
     "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios" ~:      ~?= True,
     "lesGustanLasMismasPublicaciones 4: Hay algunos (pero no todos) likes en comùn entre ambos usuarios" ~:      ~?= False,
-    "lesGustanLasMismasPublicaciones 4: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales)" ~:      ~?= False,
+    "lesGustanLasMismasPublicaciones 5: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales)" ~:      ~?= False,
     "lesGustanLasMismasPublicaciones 6: NO hay likes en comùn entre ambos usuarios" ~:       ~?= False,
     "lesGustanLasMismasPublicaciones 7: Los dos usuarios son el mismo (u1 = u2)" ~:        ~?= True,
 ]
