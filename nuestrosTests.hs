@@ -46,9 +46,10 @@ testEjercicio4 = test [
 ]
    
 testEjercicio5 = test [
-    "estaRobertoCarlos 1: cantidadDeAmigos > 1000000" ~:     ~?= True,
-    "estaRobertoCarlos 2: cantidadDeAmigos = 1000000" ~:     ~?= False,
-    "estaRobertoCarlos 3: cantidadDeAmigos < 1000000" ~:     ~?= False,
+-- NOTAR QUE se cambió el 1000000 por el 5
+    "estaRobertoCarlos 1: cantidadDeAmigos > 5" ~: redR1  ~?= True,
+    "estaRobertoCarlos 2: cantidadDeAmigos = 5" ~: redR2 ~?= False,
+    "estaRobertoCarlos 3: cantidadDeAmigos < 5" ~: redA ~?= False,
 ]
    
 testEjercicio6 = test [
@@ -104,6 +105,9 @@ u1 = (1, "Tomi")
 u2 = (2, "Mauri")
 u3 = (3, "Andy")
 u4 = (4, "ForeverAlone")
+u5 = (5, "Ibai")
+u6 = (6, "Lucas")
+u7 = (7, "Juan")
 
 rel1_2 = (u1, u2)
 rel2_3 = (u2, u3)
@@ -122,6 +126,9 @@ pub3_3 = (u3, "Trigal", [])
 
 
 
-redA = ([Tomi, Mauri, Andy], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
-redB = ([ForeverAlone], [], [])
-redC = ([Tomi, Mauri, Andy], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3)
+redA = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
+redB = ([u4], [], [])
+redC = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
+
+redR1 = ([(1000, Roberto Carlos), u1, u2, u3, u4, u5, u6, u7], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6), (1000, "Roberto Carlos", u7)], [])
+redR2 = ([(1000, Roberto Carlos), u1, u2, u3, u4, u5], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5)], [])
