@@ -64,21 +64,21 @@ testEjercicio6 = test [
 ]
    
 testEjercicio7 = test [
-    "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación" ~: publicacionesQueLeGustanA redB u4 ~?= [],
+    "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación"                       ~: publicacionesQueLeGustanA redB u4 ~?= [],
     "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n[1]) ∧ (pub_n[1] = pub_n-1[1])" ~: publicacionesQueLeGustanA redD u1 ~?= [pub2_3, pub3_1],                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
-    "publicacionesQueLeGustanA 3: Hay publicaciones con un mismo autor que le gustan a u" ~: publicacionesQueLeGustanA redD u3 ~?= [pub1_1, pub1_2, pub2_1, pub2_2]
+    "publicacionesQueLeGustanA 3: Hay publicaciones con un mismo autor que le gustan a u"    ~: publicacionesQueLeGustanA redD u3 ~?= [pub1_1, pub1_2, pub2_1, pub2_2]
    -- DEPRECATED: "publicacionesQueLeGustanA 4: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?= ,
-    "publicacionesQueLeGustanA 4: A u solo le gustan sus propias publicaciones" ~: publicacionesQueLeGustanA redE u5 ~?= [pub5_1, pub5_2, pub5_3]
+    "publicacionesQueLeGustanA 4: A u solo le gustan sus propias publicaciones"              ~: publicacionesQueLeGustanA redE u5 ~?= [pub5_1, pub5_2, pub5_3]
 ]
    
 testEjercicio8 = test [
-    "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación" ~:     ~?= True,
-    "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~:        ~?= False,
-    "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios" ~:      ~?= True,
-    "lesGustanLasMismasPublicaciones 4: Hay algunos (pero no todos) likes en comùn entre ambos usuarios" ~:      ~?= False,
-    "lesGustanLasMismasPublicaciones 5: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales)" ~:      ~?= False,
-    "lesGustanLasMismasPublicaciones 6: NO hay likes en comùn entre ambos usuarios" ~:       ~?= False,
-    "lesGustanLasMismasPublicaciones 7: Los dos usuarios son el mismo (u1 = u2)" ~:        ~?= True
+    "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación"                                  ~: lesGustanLasMismasPublicaciones redD u2 u3 ~?= True,
+    "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación"                               ~:                                            ~?= False,
+    "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios"                                         ~:                                            ~?= True,
+    "lesGustanLasMismasPublicaciones 4: Hay algunos (pero no todos) likes en común entre ambos usuarios"                              ~:                                            ~?= False,
+    "lesGustanLasMismasPublicaciones 5: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales)" ~:                                            ~?= False,
+    "lesGustanLasMismasPublicaciones 6: NO hay likes en común entre ambos usuarios"                                                   ~: lesGustanLasMismasPublicaciones redD u1 u3 ~?= False,
+    "lesGustanLasMismasPublicaciones 7: Los dos usuarios son el mismo (u1 = u2)"                                                      ~: lesGustanLasMismasPublicaciones redA u1 u1 ~?= True
 ]
    
 testEjercicio9 = test [
@@ -140,6 +140,7 @@ redB = ([u4], [], [])
 redC = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
 redD = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub2_3, pub3_1, pub3_2, pub3_3])
 redE = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3, pub5_1, pub5_2, pub5_3])
+redF =
 
 redR1 = ([(1000, Roberto Carlos), u1, u2, u3, u4, u5, u6], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6)], [])
 redR2 = ([(1000, Roberto Carlos), u1, u2, u3, u4], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4)], [])
