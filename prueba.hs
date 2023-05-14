@@ -67,13 +67,13 @@ tests = test [
 {-  Para simplificar el testing, utilizaremos estaRobertoCarlosTesteable4 que remplaza el 1000000 de amigos requeridos
     en el enunciado por un número más manejable, en nuestro caso utilizaremos al 4. -}
 
-    " estaRobertoCarlos 1: cantidadDeAmigos > 4" ~:
+    " estaRobertoCarlos 1: cantidadDeAmigos > n" ~:
         (estaRobertoCarlosTesteable4 redUsuario1Con5Amigos) ~?= True,
 
-    " estaRobertoCarlos 2: cantidadDeAmigos = 4" ~:
+    " estaRobertoCarlos 2: cantidadDeAmigos = n" ~:
         (estaRobertoCarlosTesteable4 redUsuario2Con4Amigos) ~?= False,
 
-    " estaRobertoCarlos 3: cantidadDeAmigos < 4" ~:
+    " estaRobertoCarlos 3: cantidadDeAmigos < n" ~:
         (estaRobertoCarlosTesteable4 (usuariosTodos, [relacion2_4, relacion1_3], [])) ~?= False
 
 --------------------------------------------------------------------------------------------
