@@ -28,19 +28,19 @@ testEjercicio1 = test [
     ]
 
 testEjercicio2 = test [
-    "amigosDe 1: u no tiene amigos" ~: amigosDe redB1 u4 ~?= [],
+    "amigosDe 1: u no tiene amigos" ~: amigosDe red1us1pub u4 ~?= [],
     "amigosDe 2: u tiene amigos CON nombres repetidos ∧ IDs distintos" ~: amigosDe ([(1, "Tomi"), (2, "u"), (727, "Tomi")],[(2, u), (1,"Tomi")],[(2, u), (727,"Tomi")], []) ~?= [(1, "Tomi"),(727, "Tomi")],
     "amigosDe 3: u tiene amigos, pero SIN nombres repetidos" ~: amigosDe redA u3 ~?= [2, "Mauri"]
     ]
     
 testEjercicio3 = test [
-    "cantidadDeAmigos 1: u no tiene amigos :("                                                             ~: cantidadDeAmigos redB1 u4 ~?= 0,
+    "cantidadDeAmigos 1: u no tiene amigos :("                                                             ~: cantidadDeAmigos red1us1pub u4 ~?= 0,
     "cantidadDeAmigos 2: u tiene un solo amigo"                                                            ~: cantidadDeAmigos redA u1 ~?= 1,
     "cantidadDeAmigos 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~: cantidadDeAmigos redA u2 ~?= 2
     ]
 
 testEjercicio4 = test [
-    "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~: usuarioConMasAmigos redB1 ~?= u4,
+    "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~: usuarioConMasAmigos red1us1pub ~?= u4,
     "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: usuarioConMasAmigos redC ~?= u1 || u2 || u3,
     "usuarioConMasAmigos 3: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~: usuarioConMasAmigos redA ~?= u2
     ]
@@ -58,13 +58,13 @@ testEjercicio5 = test [
     ]
    
 testEjercicio6 = test [
-    "publicacionesDe 1: u no tiene publicaciones"                        ~: publicacionesDe redB1 u4 ~?= [],
+    "publicacionesDe 1: u no tiene publicaciones"                        ~: publicacionesDe red1us1pub u4 ~?= [],
     "publicacionesDe 2: u tiene una sola publicación"                    ~: publicacionesDe redC u1 ~?= [pub1_1],
     "publicacionesDe 3: u tiene más (mayor estricto) de una publicación" ~: publicacionesDe redA u3 ~?= [pub3_1, pub3_2, pub3_3]
     ]
    
 testEjercicio7 = test [
-    "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación"                       ~: publicacionesQueLeGustanA redB1 u4 ~?= [],
+    "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación"                       ~: publicacionesQueLeGustanA red1us1pub u4 ~?= [],
     "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n[1]) ∧ (pub_n[1] = pub_n-1[1])" ~: publicacionesQueLeGustanA redD u1 ~?= [pub2_3, pub3_1],                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
     "publicacionesQueLeGustanA 3: Hay publicaciones con un mismo autor que le gustan a u"    ~: publicacionesQueLeGustanA redD u3 ~?= [pub1_1, pub1_2, pub2_1, pub2_2]
    -- DEPRECATED: "publicacionesQueLeGustanA 4: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?= ,
@@ -82,8 +82,8 @@ testEjercicio8 = test [
     ]
    
 testEjercicio9 = test [
-    "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~: tieneUnSeguidorFiel redB1 u4 ~?= False,
-    "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~: tieneUnSeguidorFiel redB2 u4 ~?=   False,
+    "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~: tieneUnSeguidorFiel red1us1pub u4 ~?= False,
+    "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~: tieneUnSeguidorFiel red1us0pub u4 ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~: tieneUnSeguidorFiel redE u5 ~?= True,
     -- DEPRECATED: "tieneUnSeguidorFiel ex4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
     "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~: tieneUnSeguidorFiel redA u2 ~?= False,
@@ -91,11 +91,11 @@ testEjercicio9 = test [
     ]
    
 testEjercicio10 = test [
-    "existeSecuenciaDeAmigos 1: u1 = u2" ~:     ~?= False,
-    "existeSecuenciaDeAmigos 2: u1 y u2 son amigos" ~:        ~?= True,
-    "existeSecuenciaDeAmigos 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:      ~?= True,
-    "existeSecuenciaDeAmigos 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:       ~?= False
-]
+    "existeSecuenciaDeAmigos 1: u1 = u2" ~: existeSecuenciaDeAmigos red1us0pub u4 u4 ~?= False,
+    "existeSecuenciaDeAmigos 2: u1 y u2 son amigos" ~: existeSecuenciaDeAmigos redA u1 u2 ~?= True,
+    "existeSecuenciaDeAmigos 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redA u1 u3 ~?= True,
+    "existeSecuenciaDeAmigos 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redD u1 u5 ~?= False
+    ]
 
 
 -- Corrige las comparaciones realizadas por los tests para que el orden en las n-uplas y listas no importe.
@@ -141,8 +141,8 @@ pub5_1 = (u5, "Hola", [u5, u6])
 pub6_1 = (u6, "Buenos Días", [u5, u6])
 
 redA = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
-redB1 = ([u4], [], [pub4_1])
-redB2 = ([u4], [], [])
+red1us1pub = ([u4], [], [pub4_1])
+red1us0pub = ([u4], [], [])
 redC = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
 redD = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub2_3, pub3_1, pub3_2, pub3_3])
 redE = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3, pub5_1, pub5_2, pub5_3])
