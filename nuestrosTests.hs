@@ -3,18 +3,19 @@ import Solucion
 
 -- Casos de Test
 
-main = [run1] ++ [run2] ++ [run3] ++ [run4] ++ [run5] ++ [run6] ++ [run7] ++ [run8] ++ [run9] ++ [run10]
+main = runTestTT todosLosTests
+todosLosTests = test [run1, run2, run3, run4, run5, run6, run7, run8, run9, run10]
 
-run1 = runTestTT testEjercicio1
-run2 = runTestTT testEjercicio2
-run3 = runTestTT testEjercicio3
-run4 = runTestTT testEjercicio4
-run5 = runTestTT testEjercicio5
-run6 = runTestTT testEjercicio6
-run7 = runTestTT testEjercicio7
-run8 = runTestTT testEjercicio8
-run9 = runTestTT testEjercicio9
-run10 = runTestTT testEjercicio10
+run1 = testEjercicio1
+run2 = testEjercicio2
+run3 = testEjercicio3
+run4 = testEjercicio4
+run5 = testEjercicio5
+run6 = testEjercicio6
+run7 = testEjercicio7
+run8 = testEjercicio8
+run9 = testEjercicio9
+run10 = testEjercicio10
 
 
 -- Nota temporal, estos casos fueron sacados de la clase práctica a modo de ejemplo
@@ -23,13 +24,13 @@ run10 = runTestTT testEjercicio10
 
 testEjercicio1 = test [
     "nombresDeUsuarios 1: Lista de usuarios vacía"         ~: nombresDeUsuarios ([],[],[])                 ~?= [],
-    "nombresDeUsuarios 2: Lista de usuarios con repetidos" ~: nombresDeUsuarios (["u2", "u3", "u2"],[],[]) ~?= ["Mauri", "Andy"],
+    "nombresDeUsuarios 2: Lista de usuarios con repetidos" ~: nombresDeUsuarios ([u2, u3, u2],[],[]) ~?= ["Mauri", "Andy"],
     "nombresDeUsuarios 3: Lista de usuarios sin repetidos" ~: nombresDeUsuarios redTigres                       ~?= ["Tomi", "Mauri", "Andy"]
     ]
 
 testEjercicio2 = test [
     "amigosDe 1: u no tiene amigos" ~: amigosDe red1us1pub u4 ~?= [],
-    "amigosDe 2: u tiene amigos CON nombres repetidos ∧ IDs distintos" ~: amigosDe ([(1, "Tomi"), (2, "u"), (727, "Tomi")],[(2, u), (1,"Tomi")],[(2, u), (727,"Tomi")], []) ~?= [(1, "Tomi"),(727, "Tomi")],
+    "amigosDe 2: u tiene amigos CON nombres repetidos ∧ IDs distintos" ~: amigosDe ([(1, "Tomi"), (2, "u"), (727, "Tomi")],[(2, "u"), (1,"Tomi")],[(2, "u"), (727,"Tomi")], []) ~?= [(1, "Tomi"),(727, "Tomi")],
     "amigosDe 3: u tiene amigos, pero SIN nombres repetidos" ~: amigosDe redTigres u3 ~?= [2, "Mauri"]
     ]
     
@@ -41,7 +42,7 @@ testEjercicio3 = test [
 
 testEjercicio4 = test [
     "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~: usuarioConMasAmigos red1us1pub ~?= u4,
-    "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: usuarioConMasAmigos redTigresRep ~?= u1 || u2 || u3,
+    "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: usuarioConMasAmigos redTigresRep ~?= u1 || usuarioConMasAmigos redTigresRep ~?= u2 || usuarioConMasAmigos redTigresRep ~?= u3,
     "usuarioConMasAmigos 3: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~: usuarioConMasAmigos redTigres ~?= u2
     ]
 
@@ -74,7 +75,7 @@ testEjercicio7 = test [
 testEjercicio8 = test [
     "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación"    ~: lesGustanLasMismasPublicaciones redTigresRepCadena u2 u3 ~?= True,
     "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~: lesGustanLasMismasPublicaciones redIbaiNoPub u1 u5 ~?= False,
-    "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios"           ~: lesGustanLasMismasPublicaciones ([u5, u6], [], [pub5_1, pub6_1]) u5 u6 ~?= True,
+    "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios"           ~: lesGustanLasMismasPublicaciones ([u6, u7], [], [pub6_1, pub7_1]) u6 u7 ~?= True,
     -- DEPRECTAED: Caso 4 implica este caso "lesGustanLasMismasPublicaciones ex4: Hay uno o más (pero no todos) likes en común entre ambos usuarios" ~:                           ~?= False,
     "lesGustanLasMismasPublicaciones 4: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales, y ambos le dieron like a al menos una publicación)" ~: lesGustanLasMismasPublicaciones redTigres u2 u3 ~?= False,
     "lesGustanLasMismasPublicaciones 5: NO hay likes en común entre ambos usuarios"                     ~: lesGustanLasMismasPublicaciones redTigresRepCadena u1 u3 ~?= False,
@@ -95,7 +96,7 @@ testEjercicio10 = test [
     "existeSecuenciaDeAmigos 2: u1 y u2 son amigos" ~: existeSecuenciaDeAmigos redTigres u1 u2 ~?= True,
     "existeSecuenciaDeAmigos 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redTigres u1 u3 ~?= True,
     "existeSecuenciaDeAmigos 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redTigresRepCadena u1 u5 ~?= False
-]
+    ]
 
 
 -- Corrige las comparaciones realizadas por los tests para que el orden en las n-uplas y listas no importe.
@@ -137,8 +138,8 @@ pub5_2 = (u5, "Esta publicación también solo tendrá mi propio like", [u5])
 pub5_3 = (u5, "Esta publicación estará likeada por todos los de la redIbai", [u1, u2, u3, u5])
 
 
-pub5_1 = (u5, "Hola", [u5, u6])
-pub6_1 = (u6, "Buenos Días", [u5, u6])
+pub6_1 = (u6, "Hola", [u6, u7])
+pub7_1 = (u7, "Buenos Días", [u6, u7])
 
 redTigres = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
 red1us1pub = ([u4], [], [pub4_1])
@@ -150,5 +151,5 @@ redIbaiNoPub = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub
 
 
 
-redR1 = ([(1000, Roberto Carlos), u1, u2, u3, u4, u5, u6], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6)], [])
-redR2 = ([(1000, Roberto Carlos), u1, u2, u3, u4], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4)], [])
+redR1 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4, u5, u6], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6)], [])
+redR2 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4)], [])
