@@ -91,10 +91,10 @@ testEjercicio9 = test [
     ]
    
 testEjercicio10 = test [
-    "existeSecuenciaDeAmigos 1: u1 = u2" ~:     ~?= False,
-    "existeSecuenciaDeAmigos 2: u1 y u2 son amigos" ~:        ~?= True,
-    "existeSecuenciaDeAmigos 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:      ~?= True,
-    "existeSecuenciaDeAmigos 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~:       ~?= False
+    "existeSecuenciaDeAmigos 1: u1 = u2" ~: existeSecuenciaDeAmigos redB2 u4 u4 ~?= False,
+    "existeSecuenciaDeAmigos 2: u1 y u2 son amigos" ~: existeSecuenciaDeAmigos redA u1 u2 ~?= True,
+    "existeSecuenciaDeAmigos 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redA u1 u3 ~?= True,
+    "existeSecuenciaDeAmigos 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redD u1 u5 ~?= False
 ]
 
 
