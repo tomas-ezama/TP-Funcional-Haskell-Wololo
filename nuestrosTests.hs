@@ -95,7 +95,7 @@ testEjercicio10 = test [
     "existeSecuenciaDeAmigos 2: u1 y u2 son amigos" ~: existeSecuenciaDeAmigos redA u1 u2 ~?= True,
     "existeSecuenciaDeAmigos 3: u1 y u2 NO son amigos ∧ (∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redA u1 u3 ~?= True,
     "existeSecuenciaDeAmigos 4: ¬(∃us : seq⟨Usuario⟩)(CadenaDeAmigos(us, red))" ~: existeSecuenciaDeAmigos redD u1 u5 ~?= False
-    ]
+]
 
 
 -- Corrige las comparaciones realizadas por los tests para que el orden en las n-uplas y listas no importe.
