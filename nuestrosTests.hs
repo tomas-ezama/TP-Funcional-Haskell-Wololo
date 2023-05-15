@@ -37,13 +37,13 @@ testEjercicio3 = test [
     "cantidadDeAmigos 1: u no tiene amigos :("                                                             ~: cantidadDeAmigos redB u4 ~?= 0,
     "cantidadDeAmigos 2: u tiene un solo amigo"                                                            ~: cantidadDeAmigos redA u1 ~?= 1,
     "cantidadDeAmigos 3: u tiene más (mayor estricto) de un amigo (tiene una cantidad finita n de amigos)" ~: cantidadDeAmigos redA u2 ~?= 2
-]
+    ]
 
 testEjercicio4 = test [
     "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~: usuarioConMasAmigos redB ~?= u4,
     "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: usuarioConMasAmigos redC ~?= u1 || u2 || u3,
     "usuarioConMasAmigos 3: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~: usuarioConMasAmigos redA ~?= u2
-]
+    ]
 
 
 {-
@@ -55,13 +55,13 @@ testEjercicio5 = test [
     "estaRobertoCarlos 1: cantidadDeAmigos > 4" ~: estaRobertoCarlosTesteable4 redR1 ~?= True,
     "estaRobertoCarlos 2: cantidadDeAmigos = 4" ~: estaRobertoCarlosTesteable4 redR2 ~?= False,
     "estaRobertoCarlos 3: cantidadDeAmigos < 4" ~: estaRobertoCarlosTesteable4 redA ~?= False
-]
+    ]
    
 testEjercicio6 = test [
     "publicacionesDe 1: u no tiene publicaciones"                        ~: publicacionesDe redB u4 ~?= [],
     "publicacionesDe 2: u tiene una sola publicación"                    ~: publicacionesDe redC u1 ~?= [pub1_1],
     "publicacionesDe 3: u tiene más (mayor estricto) de una publicación" ~: publicacionesDe redA u3 ~?= [pub3_1, pub3_2, pub3_3]
-]
+    ]
    
 testEjercicio7 = test [
     "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación"                       ~: publicacionesQueLeGustanA redB u4 ~?= [],
@@ -69,26 +69,26 @@ testEjercicio7 = test [
     "publicacionesQueLeGustanA 3: Hay publicaciones con un mismo autor que le gustan a u"    ~: publicacionesQueLeGustanA redD u3 ~?= [pub1_1, pub1_2, pub2_1, pub2_2]
    -- DEPRECATED: "publicacionesQueLeGustanA 4: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?= ,
     "publicacionesQueLeGustanA 4: A u solo le gustan sus propias publicaciones"              ~: publicacionesQueLeGustanA redE u5 ~?= [pub5_1, pub5_2, pub5_3]
-]
+    ]
    
 testEjercicio8 = test [
     "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación"                                  ~: lesGustanLasMismasPublicaciones redD u2 u3 ~?= True,
-    "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación"                               ~:                                            ~?= False,
-    "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios"                                         ~:                                            ~?= True,
-    "lesGustanLasMismasPublicaciones 4: Hay algunos (pero no todos) likes en común entre ambos usuarios"                              ~:                                            ~?= False,
-    "lesGustanLasMismasPublicaciones 5: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales)" ~:                                            ~?= False,
-    "lesGustanLasMismasPublicaciones 6: NO hay likes en común entre ambos usuarios"                                                   ~: lesGustanLasMismasPublicaciones redD u1 u3 ~?= False,
-    "lesGustanLasMismasPublicaciones 7: Los dos usuarios son el mismo (u1 = u2)"                                                      ~: lesGustanLasMismasPublicaciones redA u1 u1 ~?= True
-]
+    "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación"                               ~: lesGustanLasMismasPublicaciones redF u1 u5 ~?= False,
+    "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios"                                         ~: lesGustanLasMismasPublicaciones redG u5 u6 ~?= True,
+    -- DEPRECTAED: Caso 4 implica este caso "lesGustanLasMismasPublicaciones ex4: Hay uno o más (pero no todos) likes en común entre ambos usuarios"                            ~:                                            ~?= False,
+    "lesGustanLasMismasPublicaciones 4: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales, y ambos le dieron like a al menos una publicación)" ~: lesGustanLasMismasPublicaciones redA u2 u3 ~?= False,
+    "lesGustanLasMismasPublicaciones 5: NO hay likes en común entre ambos usuarios"                                                   ~: lesGustanLasMismasPublicaciones redD u1 u3 ~?= False,
+    "lesGustanLasMismasPublicaciones 6: Los dos usuarios son el mismo (u1 = u2)"                                                      ~: lesGustanLasMismasPublicaciones redA u1 u1 ~?= True
+    ]
    
 testEjercicio9 = test [
     "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~:     ~?= False,
     "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~:        ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
-    -- DEPRECATED: "tieneUnSeguidorFiel 4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
+    -- DEPRECATED: "tieneUnSeguidorFiel ex4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
     "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~:        ~?=   False,
     "tieneUnSeguidorFiel 5: Existe un usuario u2 al que le gustan algunas publicaciones de u, y tambièn le gustan otras publicaciones de otros usuarios (distintos a u y u2)" ~:        ~?=   False
-]
+    ]
    
 testEjercicio10 = test [
     "existeSecuenciaDeAmigos 1: u1 = u2" ~:     ~?= False,
@@ -135,12 +135,18 @@ pub5_2 = (u5, "Esta publicación también solo tendrá mi propio like", [u5])
 pub5_3 = (u5, "Esta publicación estará likeada por todos los de la redE", [u1, u2, u3, u5])
 
 
+pub5_1 = (u5, "Hola", [u5, u6]
+pub6_1 = (u6, "Buenos Días", [u5, u6])
+
 redA = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
 redB = ([u4], [], [])
 redC = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
 redD = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub2_3, pub3_1, pub3_2, pub3_3])
 redE = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3, pub5_1, pub5_2, pub5_3])
-redF =
+redF = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
+redG = ([u5, u6], [], [pub5_1, pub6_1])
+
+
 
 redR1 = ([(1000, Roberto Carlos), u1, u2, u3, u4, u5, u6], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6)], [])
 redR2 = ([(1000, Roberto Carlos), u1, u2, u3, u4], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4)], [])
