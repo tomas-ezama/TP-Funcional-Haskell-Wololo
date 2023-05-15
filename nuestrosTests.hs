@@ -42,7 +42,7 @@ testEjercicio3 = test [
 
 testEjercicio4 = test [
     "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~: usuarioConMasAmigos red1us1pub ~?= u4,
-    "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: usuarioConMasAmigos redTigresRep ~?= u1 || usuarioConMasAmigos redTigresRep ~?= u2 || usuarioConMasAmigos redTigresRep ~?= u3,
+    "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: usuarioConMasAmigos redTigresRep ~?= (u1 || u2 || u3),
     "usuarioConMasAmigos 3: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~: usuarioConMasAmigos redTigres ~?= u2
     ]
 
@@ -53,8 +53,8 @@ en el enunciado por un número más manejable. En nuestro caso, utilizaremos al 
 -}
 testEjercicio5 = test [
 -- NOTAR QUE se cambió el 1000000 por el 5
-    "estaRobertoCarlos 1: cantidadDeAmigos > 4" ~: estaRobertoCarlosTesteable4 redR1 ~?= True,
-    "estaRobertoCarlos 2: cantidadDeAmigos = 4" ~: estaRobertoCarlosTesteable4 redR2 ~?= False,
+    "estaRobertoCarlos 1: cantidadDeAmigos > 4" ~: estaRobertoCarlosTesteable4 redRoberto1 ~?= True,
+    "estaRobertoCarlos 2: cantidadDeAmigos = 4" ~: estaRobertoCarlosTesteable4 redRoberto2 ~?= False,
     "estaRobertoCarlos 3: cantidadDeAmigos < 4" ~: estaRobertoCarlosTesteable4 redTigres ~?= False
     ]
    
@@ -151,5 +151,5 @@ redIbaiNoPub = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub
 
 
 
-redR1 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4, u5, u6], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6)], [])
-redR2 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4)], [])
+redRoberto1 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4, u5, u6], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6)], [])
+redRoberto2 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4)], [])
