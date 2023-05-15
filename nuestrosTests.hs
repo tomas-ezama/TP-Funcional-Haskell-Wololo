@@ -82,8 +82,8 @@ testEjercicio8 = test [
     ]
    
 testEjercicio9 = test [
-    "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~: redB1 u4 ~?= False,
-    "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~: redB1 u4 ~?=   False,
+    "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~: tieneUnSeguidorFiel redB1 u4 ~?= False,
+    "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~: redB2 u4 ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= True,
     -- DEPRECATED: "tieneUnSeguidorFiel ex4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
     "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~:        ~?=   False,
@@ -141,8 +141,8 @@ pub5_1 = (u5, "Hola", [u5, u6])
 pub6_1 = (u6, "Buenos Días", [u5, u6])
 
 redA = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
-redB1 = ([u4], [], [])
-redB2 = ([u4], [], [pub4_1])
+redB1 = ([u4], [], [pub4_1])
+redB2 = ([u4], [], [])
 redC = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
 redD = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub2_3, pub3_1, pub3_2, pub3_3])
 redE = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3, pub5_1, pub5_2, pub5_3])
