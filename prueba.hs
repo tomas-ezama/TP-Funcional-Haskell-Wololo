@@ -53,7 +53,7 @@ tests = test [
 
     " usuarioConMasAmigos 2: Dos usuarios con la misma cantidad de amigos" ~:
         expectAny (usuarioConMasAmigos (usuariosTodos, [relacion1_2, relacion1_5, relacion2_3, relacion4_5, relacion2_5], [])) [usuario2, usuario5],
--- u1 -> 2; u2 -> 3; u3 -> 1; u4 -> 1, u5 -> 3
+
     " usuarioConMasAmigos 3: Usuario con mayor estricto cantidad de amigos que el resto" ~:
         (usuarioConMasAmigos redUsuario1Con5Amigos) ~?= usuario1,
 
@@ -74,13 +74,25 @@ tests = test [
         (estaRobertoCarlosTesteable4 redUsuario2Con4Amigos) ~?= False,
 
     " estaRobertoCarlos 3: cantidadDeAmigos < n" ~:
-        (estaRobertoCarlosTesteable4 (usuariosTodos, [relacion2_4, relacion1_3], [])) ~?= False
+        (estaRobertoCarlosTesteable4 (usuariosTodos, [relacion2_4, relacion1_3], [])) ~?= False,
 
 --------------------------------------------------------------------------------------------
 
-{-
-    " publicacionesDe 1" ~: (publicacionesDe redA usuario2) ~?= [publicacion2_1, publicacion2_2],
+    -- EJERCICIO 6:
 
+    " publicacionesDe 1: Usuario no tiene publicaciones" ~:
+        (publicacionesDe (usuariosDel1_4, [], [publicacion3_1]) usuario1) ~?= [],
+
+    " publicacionesDe 2: Usuario tiene una sola publicación" ~:
+        (publicacionesDe (usuariosTodos, [], [publicacion1_2, publicacion4_1]) usuario4) ~?= [publicacion4_1],
+
+    " publicacionesDe 3: Usuario tiene más (mayor estricto) de una publicación" ~:
+        (publicacionesDe (usuariosDel1_4, [], [publicacion1_1, publicacion1_2, publicacion1_3]) usuario1) ~?= [publicacion1_1, publicacion1_2, publicacion1_3]
+
+--------------------------------------------------------------------------------------------
+
+
+{-
     " publicacionesQueLeGustanA 1" ~: (publicacionesQueLeGustanA redA usuario1) ~?= [publicacion2_2, publicacion4_1],
 
     " lesGustanLasMismasPublicaciones 2" ~: (lesGustanLasMismasPublicaciones redB usuario1 usuario3) ~?= True,
@@ -177,3 +189,5 @@ redUsuario1Con5Amigos = (usuariosTodos, relacionesUsuario1AmigoDeTodos, [])
 relacionesUsuario2Con4Amigos = [relacion1_2, relacion2_3, relacion2_4, relacion2_5]
 
 redUsuario2Con4Amigos = (usuariosTodos, relacionesUsuario2Con4Amigos, [])
+
+usuariosDel1_4 = [usuario1, usuario2, usuario3, usuario4]
