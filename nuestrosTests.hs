@@ -42,7 +42,7 @@ testEjercicio3 = test [
 
 testEjercicio4 = test [
     "usuarioConMasAmigos 1: La red tiene un solo usuario y ninguna relación." ~: usuarioConMasAmigos red1us1pub ~?= u4,
-    "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: usuarioConMasAmigos redTigresRep ~?= (u1 || u2 || u3),
+    "usuarioConMasAmigos 2: Dos usuarios tienen la misma cantidad de amigos"  ~: expectAny (usuarioConMasAmigos redTigresRep) [u1, u2, u3],
     "usuarioConMasAmigos 3: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~: usuarioConMasAmigos redTigres ~?= u2
     ]
 
