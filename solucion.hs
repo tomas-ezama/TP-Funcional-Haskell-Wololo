@@ -70,7 +70,7 @@ usuarioConMasAmigos red = auxiliarUsuarioConMasAmigos (red) (usuarios (red))
 
 auxiliarUsuarioConMasAmigos :: RedSocial -> [Usuario] -> Usuario
 auxiliarUsuarioConMasAmigos red [u] = u
-auxiliarUsuarioConMasAmigos red (x:y:xs) | cantidadDeAmigos red x > cantidadDeAmigos red y = auxiliarUsuarioConMasAmigos red (x:xs)
+auxiliarUsuarioConMasAmigos red (x:y:xs) | cantidadDeAmigos red x >= cantidadDeAmigos red y = auxiliarUsuarioConMasAmigos red (x:xs)
                                          | otherwise = auxiliarUsuarioConMasAmigos red (y:xs)
                                 
 -- Devuelve "True" si existe un usuario, en la red social dada, que tenga más de 1000000 amigos. En otro caso, devuelve "False".
