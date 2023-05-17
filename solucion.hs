@@ -6,6 +6,8 @@
 -- Integrante 3: Mauricio Romero Laino, mauricioromerolaino@gmail.com, 18/23
 -- Integrante 4: Cian Andrés Bautista, andycia802@gmail.com, 937/21
 
+module Solucion where
+
 type Usuario = (Integer, String) -- (id, nombre)
 type Relacion = (Usuario, Usuario) -- usuarios que se relacionan
 type Publicacion = (Usuario, String, [Usuario]) -- (usuario que publica, texto publicacion, likes)
@@ -60,26 +62,24 @@ proyectarNombresDeAmigosDe u ((x, y):xs) | u == x = y : proyectarNombresDeAmigos
 
 -- Devuelve la cantidad de amigos del usuario dado en la red social dada.
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
-cantidadDeAmigos r u = contarAmigosDe (relaciones r) u
-
-contarAmigosDe :: [Relacion] -> Usuario -> Int
-contarAmigosDe [] _ = 0
-contarAmigosDe ((x, y):xs) u | u == x = 1 + contarAmigosDe xs u
-                             | u == y = 1 + contarAmigosDe xs u
-                             | otherwise = 0 + contarAmigosDe xs u
+cantidadDeAmigos red usuario = longitud (amigosDe red usuario)
 
 -- Devuelve al usuario con más amigos, en la red social dada
 usuarioConMasAmigos :: RedSocial -> Usuario
-usuarioConMasAmigos r = proyectarUsuarioConMasAmigos (usuarios r) (relaciones r)
+usuarioConMasAmigos red = auxiliarUsuarioConMasAmigos (red) (usuarios (red))
 
-proyectarUsuarioConMasAmigos :: [Usuario] -> [Relacion] -> Usuario
-proyectarUsuarioConMasAmigos [x] _ = x
-proyectarUsuarioConMasAmigos (x:y:xs) r | contarAmigosDe r x >= contarAmigosDe r y = proyectarUsuarioConMasAmigos (x:xs) r
-                                        | otherwise = proyectarUsuarioConMasAmigos (y:xs) r
+auxiliarUsuarioConMasAmigos :: RedSocial -> [Usuario] -> Usuario
+auxiliarUsuarioConMasAmigos red [u] = u
+auxiliarUsuarioConMasAmigos red (x:y:xs) | cantidadDeAmigos red x > cantidadDeAmigos red y = auxiliarUsuarioConMasAmigos red (x:xs)
+                                         | otherwise = auxiliarUsuarioConMasAmigos red (y:xs)
                                 
 -- Devuelve "True" si existe un usuario, en la red social dada, que tenga más de 1000000 amigos. En otro caso, devuelve "False".
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 1000000
+
+-- Función auxiliar para testear estaRobertoCarlos. Utiliza 4 en vez de 1000000.
+estaRobertoCarlosTesteable4 :: RedSocial -> Bool
+estaRobertoCarlosTesteable4 red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 4
 
 -- Devuelve una lista con todas las publicaciones hechas por el usuario dado, en la red social dada
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
@@ -196,3 +196,7 @@ restaListas [] _ = []
 restaListas (x:xs) lista_b | pertenece x lista_b = restaListas xs lista_b
                            | otherwise = x : restaListas xs lista_b
 
+longitud :: [t] -> Int
+-- Requiere: True
+longitud [] = 0
+longitud (x:xs) = (longitud xs) + 1
