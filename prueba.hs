@@ -52,7 +52,7 @@ tests = test [
         (usuarioConMasAmigos ([usuario4], [], [])) ~?= usuario4,
 
     " usuarioConMasAmigos 2: Dos usuarios con la misma cantidad de amigos" ~:
-        expectAny (usuarioConMasAmigos (usuariosTodos, [relacion1_2, relacion1_5, relacion2_3, relacion4_5], [])) [usuario1, usuario2],
+        expectAny (usuarioConMasAmigos (usuariosTodos, [relacion1_2, relacion1_5, relacion2_3, relacion4_5, relacion2_5], [])) [usuario2, usuario5],
 
     " usuarioConMasAmigos 3: Usuario con mayor estricto cantidad de amigos que el resto" ~:
         (usuarioConMasAmigos redUsuario1Con5Amigos) ~?= usuario1,
