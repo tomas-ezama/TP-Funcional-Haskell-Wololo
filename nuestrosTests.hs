@@ -18,9 +18,7 @@ run9 = testEjercicio9
 run10 = testEjercicio10
 
 
--- Nota temporal, estos casos fueron sacados de la clase práctica a modo de ejemplo
--- y para visualizar la sintaxis y formato que deben llevar los tests, no son del TP
--- Esquema de los test suites: https://docs.google.com/spreadsheets/d/1ISs0Z0TMPZ_7Ro_69iO2XR96wovZvKPW/edit#gid=1370724871
+
 
 testEjercicio1 = test [
     "nombresDeUsuarios 1: Lista de usuarios vacía"         ~: nombresDeUsuarios ([],[],[])                 ~?= [],
@@ -46,13 +44,11 @@ testEjercicio4 = test [
     "usuarioConMasAmigos 3: Un usuario tiene una cantidad de amigos mayor estricta a la cantidad de amigos de los demás usuarios" ~: usuarioConMasAmigos redTigres ~?= u2
     ]
 
-
+testEjercicio5 = test [
 {-
 Para simplificar el testing utilizaremos estaRobertoCarlosTesteable4, que remplaza el 1000000 de amigos requeridos
 en el enunciado por un número más manejable. En nuestro caso, utilizaremos al 4.
 -}
-testEjercicio5 = test [
--- NOTAR QUE se cambió el 1000000 por el 5
     "estaRobertoCarlos 1: cantidadDeAmigos > 4" ~: estaRobertoCarlosTesteable4 redRoberto1 ~?= True,
     "estaRobertoCarlos 2: cantidadDeAmigos = 4" ~: estaRobertoCarlosTesteable4 redRoberto2 ~?= False,
     "estaRobertoCarlos 3: cantidadDeAmigos < 4" ~: estaRobertoCarlosTesteable4 redTigres ~?= False
@@ -66,9 +62,8 @@ testEjercicio6 = test [
    
 testEjercicio7 = test [
     "publicacionesQueLeGustanA 1: A u no le gusta ninguna publicación"                       ~: publicacionesQueLeGustanA red1us1pub u4 ~?= [],
-    "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n[1]) ∧ (pub_n[1] = pub_n-1[1])" ~: publicacionesQueLeGustanA redTigresRepCadena u1 ~?= [pub2_3, pub3_1],                             -- Pendiente: formalizar la descripción de este caso (¿o alcanza con este grado de formalidad?)
-    "publicacionesQueLeGustanA 3: Hay publicaciones con un mismo autor que le gustan a u"    ~: publicacionesQueLeGustanA redTigresRepCadena u3 ~?= [pub1_1, pub1_2, pub2_1, pub2_2]
-   -- DEPRECATED: "publicacionesQueLeGustanA 4: No hay publicaciones repetidas entre las publicaciones que le gustan a u" ~:      ~?= ,
+    "publicacionesQueLeGustanA 2: (∀n>=2) (Pertenece u, pub_n[1]) ∧ (pub_n[1] = pub_n-1[1])" ~: publicacionesQueLeGustanA redTigresRepCadena u1 ~?= [pub2_3, pub3_1],
+    "publicacionesQueLeGustanA 3: Hay publicaciones con un mismo autor que le gustan a u"    ~: publicacionesQueLeGustanA redTigresRepCadena u3 ~?= [pub1_1, pub1_2, pub2_1, pub2_2],
     "publicacionesQueLeGustanA 4: A u solo le gustan sus propias publicaciones"              ~: publicacionesQueLeGustanA redIbai u5 ~?= [pub5_1, pub5_2, pub5_3]
     ]
    
@@ -76,7 +71,6 @@ testEjercicio8 = test [
     "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación"    ~: lesGustanLasMismasPublicaciones redTigresRepCadena u2 u3 ~?= True,
     "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~: lesGustanLasMismasPublicaciones redIbaiNoPub u1 u5 ~?= False,
     "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios"           ~: lesGustanLasMismasPublicaciones ([u6, u7], [], [pub6_1, pub7_1]) u6 u7 ~?= True,
-    -- DEPRECTAED: Caso 4 implica este caso "lesGustanLasMismasPublicaciones ex4: Hay uno o más (pero no todos) likes en común entre ambos usuarios" ~:                           ~?= False,
     "lesGustanLasMismasPublicaciones 4: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales, y ambos le dieron like a al menos una publicación)" ~: lesGustanLasMismasPublicaciones redTigres u2 u3 ~?= False,
     "lesGustanLasMismasPublicaciones 5: NO hay likes en común entre ambos usuarios"                     ~: lesGustanLasMismasPublicaciones redTigresRepCadena u1 u3 ~?= False,
     "lesGustanLasMismasPublicaciones 6: Los dos usuarios son el mismo (u1 = u2)"                        ~: lesGustanLasMismasPublicaciones redTigres u1 u1 ~?= True
@@ -86,7 +80,6 @@ testEjercicio9 = test [
     "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~: tieneUnSeguidorFiel red1us1pub u4 ~?= False,
     "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~: tieneUnSeguidorFiel red1us0pub u4 ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~: tieneUnSeguidorFiel redIbai u5 ~?= True,
-    -- DEPRECATED: "tieneUnSeguidorFiel ex4: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) ¬Pertenece(u2, likesDePublicacion(pub))= u " ~:      ~?= False,
     "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~: tieneUnSeguidorFiel redTigres u2 ~?= False,
     "tieneUnSeguidorFiel 5: Existe un usuario u2 al que le gustan algunas publicaciones de u, y también le gustan otras publicaciones de otros usuarios (distintos a u)" ~: tieneUnSeguidorFiel redTigresRep u2 ~?= False
     ]
@@ -100,13 +93,13 @@ testEjercicio10 = test [
 
 
 -- Corrige las comparaciones realizadas por los tests para que el orden en las n-uplas y listas no importe.
--- Copypasteado de test-catedra.hs
+-- Extraído de test-catedra.hs
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
 
 
 
 
--- redIbais sociales y demás, a modo de ejemplo:
+-- Redes sociales y demás a ser testeadas, a modo de ejemplo:
 
 u1 = (1, "Tomi")
 u2 = (2, "Mauri")
