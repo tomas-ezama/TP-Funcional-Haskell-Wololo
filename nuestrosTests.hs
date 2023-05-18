@@ -28,8 +28,8 @@ testEjercicio1 = test [
 
 testEjercicio2 = test [
     "amigosDe 1: u no tiene amigos" ~: amigosDe red1us1pub u4 ~?= [],
-    "amigosDe 2: u tiene amigos CON nombres repetidos ∧ IDs distintos" ~: amigosDe ([(1, "Tomi"), (2, "u"), (727, "Tomi")],[(2, "u"), (1,"Tomi")],[(2, "u"), (727,"Tomi")], []) ~?= [(1, "Tomi"),(727, "Tomi")],
-    "amigosDe 3: u tiene amigos, pero SIN nombres repetidos" ~: amigosDe redTigres u3 ~?= [2, "Mauri"]
+    "amigosDe 2: u tiene amigos CON nombres repetidos ∧ IDs distintos" ~: amigosDe ([(1, "Tomi"), (2, "u"), (727, "Tomi")],[((2, "u"), (1,"Tomi")),((2, "u"), (727,"Tomi"))], []) (2, "u") ~?= [(1, "Tomi"),(727, "Tomi")],
+    "amigosDe 3: u tiene amigos, pero SIN nombres repetidos" ~: amigosDe redTigres u3 ~?= [(2, "Mauri")]
     ]
     
 testEjercicio3 = test [
@@ -101,16 +101,18 @@ expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show
 
 -- Redes sociales y demás a ser testeadas, a modo de ejemplo:
 
-u1 = (1, "Tomi")
-u2 = (2, "Mauri")
-u3 = (3, "Andy")
-u4 = (4, "ForeverAlone")
-u5 = (5, "Ibai")
-u6 = (6, "Lucas")
-u7 = (7, "Juan")
+u1    = (1, "Tomi")
+u2    = (2, "Mauri")
+u3    = (3, "Andy")
+u4    = (4, "ForeverAlone")
+u5    = (5, "Ibai")
+u6    = (6, "Lucas")
+u7    = (7, "Juan")
+u1000 = (1000, "Roberto Carlos")
 
 rel1_2 = (u1, u2)
 rel2_3 = (u2, u3)
+rel1_3 = (u1, u3)
 
 pub1_1 = (u1, "Tres", [u2, u3])
 pub1_2 = (u1, "Tristes", [u3])
@@ -144,5 +146,5 @@ redIbaiNoPub = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub
 
 
 
-redRoberto1 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4, u5, u6], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4), (1000, "Roberto Carlos", u5), (1000, "Roberto Carlos", u6)], [])
-redRoberto2 = ([(1000, "Roberto Carlos"), u1, u2, u3, u4], [(1000, "Roberto Carlos", u1), (1000, "Roberto Carlos", u2), (1000, "Roberto Carlos", u3), (1000, "Roberto Carlos", u4)], [])
+redRoberto1 = ([u1000, u1, u2, u3, u4, u5, u6], [(u1000, u1), (u1000, u2), (u1000, u3), (u1000, u4), (u1000, u5), (u1000, u6)], [])
+redRoberto2 = ([u1000, u1, u2, u3, u4], [(u1000, u1), (u1000, u2), (u1000, u3), (u1000, u4)], [])
