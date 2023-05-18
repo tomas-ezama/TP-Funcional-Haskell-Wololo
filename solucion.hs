@@ -38,6 +38,8 @@ likesDePublicacion (_, _, us) = us
 
 -- Ejercicios
 
+---------------------------------------- EJERCICIO 1 ----------------------------------------
+
 -- Devuelve una lista con todos los usuarios de la red social dada.
 nombresDeUsuarios :: RedSocial -> [String]
 nombresDeUsuarios x = proyectarNombres(usuarios x)
@@ -50,6 +52,9 @@ proyectarNombresConRepetidos :: [Usuario] -> [String]
 proyectarNombresConRepetidos [] = []
 proyectarNombresConRepetidos (x:xs) = nombreDeUsuario x : proyectarNombresConRepetidos xs
 
+
+---------------------------------------- EJERCICIO 2 ----------------------------------------
+
 -- Devuelve una lista con todos los amigos del usuario dado en la red social dada.
 amigosDe :: RedSocial -> Usuario -> [Usuario]
 amigosDe r u = proyectarNombresDeAmigosDe u (relaciones r)
@@ -60,9 +65,15 @@ proyectarNombresDeAmigosDe u ((x, y):xs) | u == x = y : proyectarNombresDeAmigos
                                          | u == y = x : proyectarNombresDeAmigosDe u xs
                                          | otherwise = proyectarNombresDeAmigosDe u xs
 
+
+---------------------------------------- EJERCICIO 3 ----------------------------------------
+
 -- Devuelve la cantidad de amigos del usuario dado en la red social dada.
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos red usuario = longitud (amigosDe red usuario)
+
+
+---------------------------------------- EJERCICIO 4 ----------------------------------------
 
 -- Devuelve al usuario con más amigos, en la red social dada
 usuarioConMasAmigos :: RedSocial -> Usuario
@@ -72,7 +83,10 @@ auxiliarUsuarioConMasAmigos :: RedSocial -> [Usuario] -> Usuario
 auxiliarUsuarioConMasAmigos red [u] = u
 auxiliarUsuarioConMasAmigos red (x:y:xs) | cantidadDeAmigos red x >= cantidadDeAmigos red y = auxiliarUsuarioConMasAmigos red (x:xs)
                                          | otherwise = auxiliarUsuarioConMasAmigos red (y:xs)
-                                
+
+
+---------------------------------------- EJERCICIO 5 ----------------------------------------
+
 -- Devuelve "True" si existe un usuario, en la red social dada, que tenga más de 1000000 amigos. En otro caso, devuelve "False".
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 1000000
@@ -80,6 +94,9 @@ estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 100
 -- Función auxiliar para testear estaRobertoCarlos. Utiliza 4 en vez de 1000000.
 estaRobertoCarlosTesteable4 :: RedSocial -> Bool
 estaRobertoCarlosTesteable4 red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 4
+
+
+---------------------------------------- EJERCICIO 6 ----------------------------------------
 
 -- Devuelve una lista con todas las publicaciones hechas por el usuario dado, en la red social dada
 publicacionesDe :: RedSocial -> Usuario -> [Publicacion]
@@ -93,6 +110,8 @@ auxiliarPublicacionesDe (x:xs) u | usuarioDePublicacion (x) == u = (x) : auxilia
                                  | otherwise = auxiliarPublicacionesDe xs u
 
 
+---------------------------------------- EJERCICIO 7 ----------------------------------------
+
 -- Devuelve una lista con todas las publicaciones "likeadas" por el usuario dado, en la red social dada.
 publicacionesQueLeGustanA :: RedSocial -> Usuario -> [Publicacion]
 publicacionesQueLeGustanA red u = auxiliarPublicacionesQueLeGustanA (publicaciones (red)) (u)
@@ -105,6 +124,8 @@ auxiliarPublicacionesQueLeGustanA (x:xs) u | pertenece (u) (likesDePublicacion (
 -- OBS temporal: auxiliarPublicacionesDe y auxiliarPublicacionesQueLeGustanA tienen el mismo código cambiando la función que utilizan
 
 
+---------------------------------------- EJERCICIO 8 ----------------------------------------
+
 -- Si ambos usuarios dados, en la red social dada, le dieron "like" a las mismas publicaciones, devuelve "True". Si no, devuelve "False".
 lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
 lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA (red) (u1)) (publicacionesQueLeGustanA (red) (u2))
@@ -115,12 +136,16 @@ tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
 tieneUnSeguidorFiel r u | (publicacionesDe r u) /= [] = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (quitar u (usuarios r))
                         | otherwise = False
 
+
+---------------------------------------- EJERCICIO 9 ----------------------------------------
+
 auxiliarTieneUnSeguidorFiel :: [Publicacion] -> [Usuario]-> Bool
 auxiliarTieneUnSeguidorFiel _ [] = False
 auxiliarTieneUnSeguidorFiel [] _ = True
 auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarNoRepetidos ((u) ++ (likesDePublicacion p)))
 
 
+---------------------------------------- EJERCICIO 10 ---------------------------------------
 
 -- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
@@ -148,16 +173,13 @@ auxiliarExisteSecuenciaDeAmigos red us u_objetivo lista_negra | pertenece (u_obj
         | otherwise = auxiliarExisteSecuenciaDeAmigos (red) (restaListas (amigosDeUsuarios (red) (us)) (lista_negra)) (u_objetivo) (lista_negra ++ us)
 
 
--- Funciones varias
+-- Funciones auxiliares generales
 
 pertenece :: (Eq t) => t -> [t] -> Bool
 -- Requiere: True
 pertenece _ [] = False
 pertenece e (x:xs) | e == x = True
                    | otherwise = pertenece e xs
-
-estaEnRelacion :: Usuario -> Relacion -> Bool
-estaEnRelacion u (r1, r2) = u == r1 || u == r2
 
 eliminarRepetidos :: (Eq t) => [t] -> [t]
 -- Requiere: True
@@ -205,12 +227,11 @@ mismosElementos s r = (esContenido s r) && (esContenido r s)
 
 restaListas :: (Eq t) => [t] -> [t] -> [t]
 -- Requiere: True
--- A - B = x pertenecientes a A y x no pertenece a b.
--- OBS: Elimina todos los elementos que estan en a y b.
+-- A - B son los x tales que x pertenece a A y x no pertenece a b.
 -- Devuelve el resultado restante en el orden en el que aparecian los elementos en A. 
 restaListas [] _ = []
 restaListas (x:xs) lista_b | pertenece x lista_b = restaListas xs lista_b
-                           | otherwise = x : restaListas xs lista_b
+                           | otherwise = x : (restaListas xs lista_b)
 
 longitud :: [t] -> Int
 -- Requiere: True

@@ -256,7 +256,7 @@ hayUsuariosConElMismoNombre = [usuario6, usuario1, usuario5]
 usuariosRepetidos = [usuario1, usuario2, usuario1, usuario2]
 
 relacionesUsuario2SinAmigos = [relacion1_4, relacion3_4]
-redUsuario2SinAmigos = (usuariosA, relacionesUsuario2SinAmigos, [])
+redUsuario2SinAmigos = (usuariosDel1_4, relacionesUsuario2SinAmigos, [])
 
 relacionesUsuario1AmigoDeTodos = [relacion1_2, relacion1_3, relacion1_4, relacion1_5, relacion1_6] -- Usuario 1 tiene 5 amigos.
 redUsuario1Con5Amigos = (usuariosTodos, relacionesUsuario1AmigoDeTodos, [])
