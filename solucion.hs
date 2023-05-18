@@ -112,7 +112,7 @@ lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeG
 
 -- Dado un usuario, si este ha hecho publicaciones en la red social dada y existe algún otro usuario que le haya dado "like" a todas ellas, devuelve "True". En otro caso, devuelve "False".
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel r u | (publicacionesDe r u) /= [] = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (usuarios r)
+tieneUnSeguidorFiel r u | (publicacionesDe r u) /= [] = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (quitar u (usuarios r))
                         | otherwise = False
 
 auxiliarTieneUnSeguidorFiel :: [Publicacion] -> [Usuario]-> Bool
@@ -168,6 +168,12 @@ eliminarNoRepetidos :: (Eq t) => [t] -> [t]
 -- Requiere: True
 eliminarNoRepetidos s | todosDistintos s = []
 eliminarNoRepetidos (x:xs) = (if not(pertenece x xs) then (eliminarNoRepetidos xs) else (x : eliminarNoRepetidos xs))
+
+quitar :: (Eq t) => t -> [t] -> [t]
+-- Requiere: True
+-- Elimina, de existir, la primera (solamente) aparición del elemento e.
+quitar _ [] = []
+quitar e (x:xs) = if e == x then xs else (x) : (quitar e xs)
 
 quitarTodos :: (Eq t) => t -> [t] -> [t]
 -- Requiere: True
