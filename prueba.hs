@@ -126,17 +126,55 @@ tests = test [
         (lesGustanLasMismasPublicaciones (usuariosTodos, [], [pub2_b, pub3_c, pub4_c, pub4_a, pub1_e]) usuario1 usuario3) ~?= False,
 
     " lesGustanLasMismasPublicaciones 6: Ambos usuarios son la misma persona" ~:
-        (lesGustanLasMismasPublicaciones (usuariosTodos, [], [pub2_b, pub3_c, pub1_a, pub4_c]) usuario1 usuario1) ~?= True
+        (lesGustanLasMismasPublicaciones (usuariosTodos, [], [pub2_b, pub3_c, pub1_a, pub4_c]) usuario1 usuario1) ~?= True,
 
 --------------------------------------------------------------------------------------------
 
     -- EJERCICIO 9:
     
-    " tieneUnSeguidorFiel 1" ~: (tieneUnSeguidorFiel redA usuario1) ~?= True,
+    " tieneUnSeguidorFiel 1: Usuario autor es el único usuario que existe en la red social y no tiene publicaciones" ~:
+        (tieneUnSeguidorFiel ([usuario1], [], []) usuario1) ~?= False,
 
-{-
+    " tieneUnSeguidorFiel 2: Usuario autor no es el único usuario que existe en la red social y no tiene publicaciones" ~:
+        (tieneUnSeguidorFiel ([usuario1, usuario2], [], []) usuario1) ~?= False,
 
-    " existeSecuenciaDeAmigos 1" ~: (existeSecuenciaDeAmigos redA usuario1 usuario3) ~?= True -}
+    " tieneUnSeguidorFiel 3: Usuario autor es el único usuario que existe en la red social, tiene publicaciones. No le gustan sus mismas publicaciones" ~:
+        (tieneUnSeguidorFiel ([usuario1], [], [pub1_d]) usuario1) ~?= False, -- OBS: A nadie le gusta su publicación
+
+    " tieneUnSeguidorFiel 4: Usuario autor intenta ser su propio seguir fiel" ~:
+        (tieneUnSeguidorFiel ([usuario1], [], [pubAutoLike1_a]) usuario1) ~?= False, -- porque pide u != u2.  -ME TIRA ERROR WTF
+
+{-     " tieneUnSeguidorFiel 5: A seguidor le gustan todas y solamente las publicaciones de autor" ~: --BORRAR
+        (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_d]) usuario3) ~?= True, -- El seguidor fiel es usuario4 -}
+
+    " tieneUnSeguidorFiel 6: A seguidor le gustan todas las publicaciones de autor y alguna/s más" ~:
+        (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_d, pub1_b, pub2_a]) usuario3) ~?= True, -- El seguidor fiel es usuario4
+
+    " tieneUnSeguidorFiel 7: A seguidor le gustan algunas (no todas) las publicaciones de autor y alguna/s más" ~:
+        (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_c, pub3_d, pub1_b, pub2_a]) usuario3) ~?= False, -- El casi seguidor fiel es usuario4
+
+--------------------------------------------------------------------------------------------
+
+    -- EJERCICIO 10:
+
+    " existeSecuenciaDeAmigos 1: Red sin amistades, u1 != u2" ~:
+        (existeSecuenciaDeAmigos (usuariosTodos, [], []) usuario1 usuario2) ~?= False,
+
+    " existeSecuenciaDeAmigos 2: Los dos usuarios son la misma persona y no tiene ningún amigo" ~:
+        (existeSecuenciaDeAmigos (usuariosTodos, [relacion3_4], []) usuario1 usuario1) ~?= False, -- ERROR WTF por que caraJO ME DA TRUe
+
+    " existeSecuenciaDeAmigos 3: Los dos usuarios son la misma persona y tiene amigo/s" ~:
+        (existeSecuenciaDeAmigos (usuariosTodos, [relacion1_5, relacion3_4], []) usuario1 usuario1) ~?= True,
+
+    " existeSecuenciaDeAmigos 4: u1 y u2 son amigos directos" ~:
+        (existeSecuenciaDeAmigos (usuariosTodos, [relacion1_2, relacion1_4, relacion4_5], []) usuario1 usuario2) ~?= True,
+
+    " existeSecuenciaDeAmigos 5: u1 y u2 no son amigos directos y existe la sequencia de amigos (u1 != u2)" ~:
+        (existeSecuenciaDeAmigos (usuariosTodos, [relacion1_2, relacion1_4, relacion4_5, relacion3_5], []) usuario1 usuario3) ~?= True,
+    
+        " existeSecuenciaDeAmigos 5: u1 y u2 no son amigos directos y no existe la sequencia de amigos (u1 != u2)" ~:
+        (existeSecuenciaDeAmigos (usuariosTodos, [relacion1_2, relacion2_3, relacion1_3, relacion5_6, relacion1_4], []) usuario1 usuario6) ~?= False
+
  ]
 
 expectAny actual expected = elem actual expected ~? ("expected any of: " ++ show expected ++ "\n but got: " ++ show actual)
@@ -189,6 +227,7 @@ pub2_b = (usuario2, "Good Bye World", [usuario1, usuario3])
 pub3_a = (usuario3, "Lorem Ipsum", [])
 pub3_b = (usuario3, "dolor sit amet", [usuario4])
 pub3_c = (usuario3, "consectetur adipiscing elit", [usuario1, usuario3])
+pub3_d = (usuario3, "Texto", [usuario4, usuario1])
 
 pub4_a = (usuario4, "I am Alice. Not", [usuario1, usuario5])
 pub4_b = (usuario4, "I am Bob", [])
