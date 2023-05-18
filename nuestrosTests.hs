@@ -55,7 +55,7 @@ en el enunciado por un número más manejable. En nuestro caso, utilizaremos al 
     ]
    
 testEjercicio6 = test [
-    "publicacionesDe 1: u no tiene publicaciones"                        ~: publicacionesDe red1us1pub u4 ~?= [],
+    "publicacionesDe 1: u no tiene publicaciones"                        ~: publicacionesDe red1us0pub u4 ~?= [],
     "publicacionesDe 2: u tiene una sola publicación"                    ~: publicacionesDe redTigresRep u1 ~?= [pub1_1],
     "publicacionesDe 3: u tiene más (mayor estricto) de una publicación" ~: publicacionesDe redTigres u3 ~?= [pub3_1, pub3_2, pub3_3]
     ]
@@ -80,7 +80,7 @@ testEjercicio9 = test [
     "tieneUnSeguidorFiel 1: u es el único usuario que existe en la red social" ~: tieneUnSeguidorFiel red1us1pub u4 ~?= False,
     "tieneUnSeguidorFiel 2: u no tiene publicaciones" ~: tieneUnSeguidorFiel red1us0pub u4 ~?=   False,
     "tieneUnSeguidorFiel 3: (∃u2 : Usuario) (Pertenece(u2, usuarios(red)) ∧ u ̸= u2 ∧ (∀pub : Publicacion) (Pertenece(pub, publicaciones(red)) ∧ usuarioDePublicacion(pub) Pertenece(u2, likesDePublicacion(pub))= u " ~: tieneUnSeguidorFiel redIbai u5 ~?= True,
-    "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~: tieneUnSeguidorFiel redTigres u2 ~?= False,
+    "tieneUnSeguidorFiel 4: Existe un usuario u2 al que le gustan algunas publicaciones de u, y no le gusta ninguna otra publicación" ~: tieneUnSeguidorFiel redHolaQueTal u1 ~?= False,
     "tieneUnSeguidorFiel 5: Existe un usuario u2 al que le gustan algunas publicaciones de u, y también le gustan otras publicaciones de otros usuarios (distintos a u)" ~: tieneUnSeguidorFiel redTigresRep u2 ~?= False
     ]
    
@@ -143,7 +143,7 @@ redTigresRep = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2,
 redTigresRepCadena = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub2_3, pub3_1, pub3_2, pub3_3])
 redIbai = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3, pub5_1, pub5_2, pub5_3])
 redIbaiNoPub = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
-
+redHolaQueTal = ([u1, u4], [], [(u1, "Hola", [u4]),(u1, "Que", [u4]),(u1, "Tal", [])])
 
 
 redRoberto1 = ([u1000, u1, u2, u3, u4, u5, u6], [(u1000, u1), (u1000, u2), (u1000, u3), (u1000, u4), (u1000, u5), (u1000, u6)], [])
