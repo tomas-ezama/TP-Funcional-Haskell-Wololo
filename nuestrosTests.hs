@@ -56,7 +56,7 @@ en el enunciado por un número más manejable. En nuestro caso, utilizaremos al 
    
 testEjercicio6 = test [
     "publicacionesDe 1: u no tiene publicaciones"                        ~: publicacionesDe red1us0pub u4 ~?= [],
-    "publicacionesDe 2: u tiene una sola publicación"                    ~: publicacionesDe redTigresRep u1 ~?= [pub1_1],
+    "publicacionesDe 2: u tiene una sola publicación"                    ~: publicacionesDe red1us1pub u4 ~?= [pub4_1],
     "publicacionesDe 3: u tiene más (mayor estricto) de una publicación" ~: publicacionesDe redTigres u3 ~?= [pub3_1, pub3_2, pub3_3]
     ]
    
@@ -68,7 +68,7 @@ testEjercicio7 = test [
     ]
    
 testEjercicio8 = test [
-    "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación"    ~: lesGustanLasMismasPublicaciones redTigresRepCadena u2 u3 ~?= True,
+    "lesGustanLasMismasPublicaciones 1: A ninguno de los dos usuarios les gusta ninguna publicación"    ~: lesGustanLasMismasPublicaciones redRoberto1 u2 u3 ~?= True,
     "lesGustanLasMismasPublicaciones 2: Solo a uno de los dos usuarios no le gusta ninguna publicación" ~: lesGustanLasMismasPublicaciones redIbaiNoPub u1 u5 ~?= False,
     "lesGustanLasMismasPublicaciones 3: Les gustan las mismas publicaciones a ambos usuarios"           ~: lesGustanLasMismasPublicaciones ([u6, u7], [], [pub6_1, pub7_1]) u6 u7 ~?= True,
     "lesGustanLasMismasPublicaciones 4: Los likes de un usuario están contenidos en los likes del otro usuario (pero no son iguales, y ambos le dieron like a al menos una publicación)" ~: lesGustanLasMismasPublicaciones redTigres u2 u3 ~?= False,
@@ -139,7 +139,7 @@ pub7_1 = (u7, "Buenos Días", [u6, u7])
 redTigres = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
 red1us1pub = ([u4], [], [pub4_1])
 red1us0pub = ([u4], [], [])
-redTigresRep = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
+redTigresRep = ([u1, u2, u3], [rel1_2, rel1_3, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub2_3, pub3_1, pub3_2, pub3_3])
 redTigresRepCadena = ([u1, u2, u3], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub2_3, pub3_1, pub3_2, pub3_3])
 redIbai = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3, pub5_1, pub5_2, pub5_3])
 redIbaiNoPub = ([u1, u2, u3, u5], [rel1_2, rel2_3], [pub1_1, pub1_2, pub1_3, pub2_1, pub2_2, pub3_1, pub3_2, pub3_3])
