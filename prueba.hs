@@ -151,6 +151,9 @@ testEjercicio9 = test [
     " tieneUnSeguidorFiel 4: Usuario autor intenta ser su propio seguir fiel" ~:
         (tieneUnSeguidorFiel ([usuario1], [], [pubAutoLike1_a]) usuario1) ~?= False, -- False porque pide u != u2
 
+{-     " tieneUnSeguidorFiel 5: A seguidor le gustan todas y solamente las publicaciones de autor" ~: --BORRAR
+        (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_d]) usuario3) ~?= True, -- El seguidor fiel es usuario4 -}
+
     " tieneUnSeguidorFiel 6: A seguidor le gustan todas las publicaciones de autor y alguna/s más" ~:
         (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_d, pub1_b, pub2_a]) usuario3) ~?= True, -- El seguidor fiel es usuario4
 
@@ -253,7 +256,7 @@ hayUsuariosConElMismoNombre = [usuario6, usuario1, usuario5]
 usuariosRepetidos = [usuario1, usuario2, usuario1, usuario2]
 
 relacionesUsuario2SinAmigos = [relacion1_4, relacion3_4]
-redUsuario2SinAmigos = (usuariosA, relacionesUsuario2SinAmigos, [])
+redUsuario2SinAmigos = (usuariosDel1_4, relacionesUsuario2SinAmigos, [])
 
 relacionesUsuario1AmigoDeTodos = [relacion1_2, relacion1_3, relacion1_4, relacion1_5, relacion1_6] -- Usuario 1 tiene 5 amigos.
 redUsuario1Con5Amigos = (usuariosTodos, relacionesUsuario1AmigoDeTodos, [])
