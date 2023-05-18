@@ -153,32 +153,38 @@ auxiliarExisteSecuenciaDeAmigos red us u_objetivo lista_negra | pertenece (u_obj
 pertenece :: (Eq t) => t -> [t] -> Bool
 -- Requiere: True
 pertenece _ [] = False
-pertenece e (x:xs) = if e == x then True else pertenece e xs
+pertenece e (x:xs) | e == x = True
+                   | otherwise = pertenece e xs
 
 estaEnRelacion :: Usuario -> Relacion -> Bool
 estaEnRelacion u (r1, r2) = u == r1 || u == r2
 
 eliminarRepetidos :: (Eq t) => [t] -> [t]
 -- Requiere: True
-eliminarRepetidos s | todosDistintos s = s  
-eliminarRepetidos (x:xs) = (x) : (if pertenece x xs then (eliminarRepetidos (quitarTodos x xs)) else (eliminarRepetidos xs))
+eliminarRepetidos s | todosDistintos s = s
+eliminarRepetidos (x:xs) | pertenece x xs = x : (eliminarRepetidos (quitarTodos x xs))
+                         | otherwise = x : (eliminarRepetidos xs)
+
 
 eliminarNoRepetidos :: (Eq t) => [t] -> [t]
 -- Funcion elimina elementos no repetidos en caso de estar repetido quedaran n-1 repeticiones. [1,1,1] -> [1,1]
 -- Requiere: True
 eliminarNoRepetidos s | todosDistintos s = []
-eliminarNoRepetidos (x:xs) = (if not(pertenece x xs) then (eliminarNoRepetidos xs) else (x : eliminarNoRepetidos xs))
+eliminarNoRepetidos (x:xs) | not(pertenece x xs) = (eliminarNoRepetidos xs)
+                           | otherwise = x : eliminarNoRepetidos xs
 
 quitar :: (Eq t) => t -> [t] -> [t]
 -- Requiere: True
 -- Elimina, de existir, la primera (solamente) aparición del elemento e.
 quitar _ [] = []
-quitar e (x:xs) = if e == x then xs else (x) : (quitar e xs)
+quitar e (x:xs) | e == x = xs
+                | otherwise = (x) : (quitar e xs)
 
 quitarTodos :: (Eq t) => t -> [t] -> [t]
 -- Requiere: True
 quitarTodos _ [] = []
-quitarTodos e (x:xs) = if e == x then (quitarTodos e xs) else (x) : (quitarTodos e xs)
+quitarTodos e (x:xs) | e == x = (quitarTodos e xs)
+                     | otherwise = (x) : (quitarTodos e xs)
 
 todosDistintos :: (Eq t) => [t] -> Bool
 -- Requiere: True
@@ -189,7 +195,8 @@ esContenido :: (Eq t) => [t] -> [t] -> Bool
 -- Requiere: True
 -- Quiero ver que a contenido en b. o sea cada elemento de a esta también en b.
 esContenido [] b = True
-esContenido (x:xs) b = if pertenece x b then esContenido xs b else False
+esContenido (x:xs) b | pertenece x b = esContenido xs b
+                     | otherwise = False
 
 mismosElementos :: (Eq t) => [t] -> [t] -> Bool
 -- Requiere: True
