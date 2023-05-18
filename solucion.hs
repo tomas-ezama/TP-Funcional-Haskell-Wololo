@@ -105,7 +105,6 @@ publicacionesDe red u = auxiliarPublicacionesDe (publicaciones (red)) (u)
 auxiliarPublicacionesDe :: [Publicacion] -> Usuario -> [Publicacion]
 -- Nota temporal: Le paso como input (publicaciones (red))
 auxiliarPublicacionesDe [] _ = []
---auxiliarPublicacionesDe (x:xs) u = if (usuarioDePublicacion (x)) == u then (x) : auxiliarPublicacionesDe xs u else auxiliarPublicacionesDe xs u
 auxiliarPublicacionesDe (x:xs) u | usuarioDePublicacion (x) == u = (x) : auxiliarPublicacionesDe xs u
                                  | otherwise = auxiliarPublicacionesDe xs u
 
@@ -131,13 +130,12 @@ lesGustanLasMismasPublicaciones :: RedSocial -> Usuario -> Usuario -> Bool
 lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeGustanA (red) (u1)) (publicacionesQueLeGustanA (red) (u2))
 
 
+---------------------------------------- EJERCICIO 9 ----------------------------------------
+
 -- Dado un usuario, si este ha hecho publicaciones en la red social dada y existe algún otro usuario que le haya dado "like" a todas ellas, devuelve "True". En otro caso, devuelve "False".
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
 tieneUnSeguidorFiel r u | (publicacionesDe r u) /= [] = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (quitar u (usuarios r))
                         | otherwise = False
-
-
----------------------------------------- EJERCICIO 9 ----------------------------------------
 
 auxiliarTieneUnSeguidorFiel :: [Publicacion] -> [Usuario]-> Bool
 auxiliarTieneUnSeguidorFiel _ [] = False
