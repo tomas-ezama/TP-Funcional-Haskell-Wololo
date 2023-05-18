@@ -91,7 +91,7 @@ auxiliarUsuarioConMasAmigos red (x:y:xs) | cantidadDeAmigos red x >= cantidadDeA
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 1000000
 
--- Función auxiliar para testear estaRobertoCarlos. Utiliza 4 en vez de 1000000.
+-- Función auxiliar para testear estaRobertoCarlos. Utiliza 4 en vez de 1000000 amigos.
 estaRobertoCarlosTesteable4 :: RedSocial -> Bool
 estaRobertoCarlosTesteable4 red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 4
 
