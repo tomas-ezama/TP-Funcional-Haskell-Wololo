@@ -112,7 +112,8 @@ lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeG
 
 -- Dado un usuario, si este ha hecho publicaciones en la red social dada y existe algún otro usuario que le haya dado "like" a todas ellas, devuelve "True". En otro caso, devuelve "False".
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel r u = if (publicacionesDe r u) /= [] then auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (usuarios r) else False
+tieneUnSeguidorFiel r u | (publicacionesDe r u) /= [] = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (usuarios r)
+                        | otherwise = False
 
 auxiliarTieneUnSeguidorFiel :: [Publicacion] -> [Usuario]-> Bool
 auxiliarTieneUnSeguidorFiel _ [] = False
@@ -123,6 +124,8 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 -- Devuelve "True" si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve "false".
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
+existeSecuenciaDeAmigos red u1 u2 | u1 == u2 && (cantidadDeAmigos (red) (u1)) > 0 = True
+existeSecuenciaDeAmigos red u1 u2 | u1 == u2 = False
 existeSecuenciaDeAmigos red u1 u2 = auxiliarExisteSecuenciaDeAmigos red [u1] u2 []
 
 -- PRIMER PASO: RAMIFICAR LOS AMIGOS DE LOS AMIGOS. (AMIGOS DE AMIGOS)

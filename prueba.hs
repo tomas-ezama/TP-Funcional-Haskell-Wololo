@@ -172,7 +172,7 @@ tests = test [
     " existeSecuenciaDeAmigos 5: u1 y u2 no son amigos directos y existe la sequencia de amigos (u1 != u2)" ~:
         (existeSecuenciaDeAmigos (usuariosTodos, [relacion1_2, relacion1_4, relacion4_5, relacion3_5], []) usuario1 usuario3) ~?= True,
     
-        " existeSecuenciaDeAmigos 5: u1 y u2 no son amigos directos y no existe la sequencia de amigos (u1 != u2)" ~:
+    " existeSecuenciaDeAmigos 5: u1 y u2 no son amigos directos y no existe la sequencia de amigos (u1 != u2)" ~:
         (existeSecuenciaDeAmigos (usuariosTodos, [relacion1_2, relacion2_3, relacion1_3, relacion5_6, relacion1_4], []) usuario1 usuario6) ~?= False
 
  ]
