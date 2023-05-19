@@ -152,8 +152,8 @@ existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAuxiliar (relaciones 
 
 existeSecuenciaDeAmigosAuxiliar :: [Relacion] -> Usuario -> Usuario -> [Usuario]-> Bool
 existeSecuenciaDeAmigosAuxiliar _ _ _ [] = False
-existeSecuenciaDeAmigosAuxiliar red u1 u2 (f:fs) | sonAmigos red u1 u2 = True 
-                                              | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe red u1) f u2 (fs ++ (auxiliarAmigosDe f red))
+existeSecuenciaDeAmigosAuxiliar rels u1 u2 (f:fs) | sonAmigos rels u1 u2 = True 
+                                              | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe rels u1) f u2 (fs ++ (auxiliarAmigosDe f rels))
 
 eliminarRelacionesDe :: [Relacion] -> Usuario -> [Relacion]
 eliminarRelacionesDe [] _ = []
