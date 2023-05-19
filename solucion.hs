@@ -148,25 +148,25 @@ auxiliarTieneUnSeguidorFiel (p:ps) u = auxiliarTieneUnSeguidorFiel ps (eliminarN
 
 -- Devuelve True si existe una cadena de amigos que empiece con el primer usuario dado, y termine con el segundo usuario dado. En otro caso, devuelve False.
 existeSecuenciaDeAmigos :: RedSocial -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAuxiliar (relaciones red) u1 u2 (amigosDe red u1)
+existeSecuenciaDeAmigos red u1 u2 | u1 == u2 && (cantidadDeAmigos (red) (u1)) > 0 = True
+existeSecuenciaDeAmigos red u1 u2 | u1 == u2 = False
+existeSecuenciaDeAmigos red u1 u2 = auxiliarExisteSecuenciaDeAmigos red [u1] u2 []
 
-existeSecuenciaDeAmigosAuxiliar :: [Relacion] -> Usuario -> Usuario -> [Usuario]-> Bool
-existeSecuenciaDeAmigosAuxiliar _ _ _ [] = False
-existeSecuenciaDeAmigosAuxiliar rels u1 u2 (f:fs) | sonAmigos rels u1 u2 = True 
-                                                  | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe rels u1) f u2 (fs ++ (auxiliarAmigosDe f rels))
+amigosDeUsuariosConRepetidos :: RedSocial -> [Usuario] -> [Usuario]
+-- Toma una red social y una lista de usuarios. Devuelve una lista con todos los amigos de la lista de usuarios pasada. (Tiene repertidos)
+-- Es decir, devuelve una lista con todos los usuarios que son amigos con al menos un usuario de la lista.
+amigosDeUsuariosConRepetidos _ [] = []
+amigosDeUsuariosConRepetidos red (x:xs) = (amigosDe (red) (x)) ++ (amigosDeUsuariosConRepetidos (red) (xs))
 
-eliminarRelacionesDe :: [Relacion] -> Usuario -> [Relacion]
-eliminarRelacionesDe [] _ = []
-eliminarRelacionesDe (r:rs) u | estaEnRelacion u r = eliminarRelacionesDe rs u
-                              | otherwise = r : eliminarRelacionesDe rs u
+amigosDeUsuarios :: RedSocial -> [Usuario] -> [Usuario]
+-- Toma una red social y una lista de usuarios. Devuelve una lista con todos los usuarios que son amigos con al menos un usuario de la lista. (Sin repeticiones)
+amigosDeUsuarios red us = eliminarRepetidos(amigosDeUsuariosConRepetidos red us)
 
-sonAmigos :: [Relacion] -> Usuario -> Usuario -> Bool
-sonAmigos [] _ _ = False
-sonAmigos (r:rs) u u2 | estaEnRelacion u r && estaEnRelacion u2 r = True
-                      | otherwise = sonAmigos rs u u2
-
-estaEnRelacion :: Usuario -> Relacion -> Bool
-estaEnRelacion u (r1, r2) = u == r1 || u == r2
+-- lista_negra es la lista de usuarios que ya fueron ramificados por la función amigosDeUsuarios, y por lo tanto, no deben volverse a ramificar.
+auxiliarExisteSecuenciaDeAmigos :: RedSocial -> [Usuario] -> Usuario -> [Usuario] -> Bool
+auxiliarExisteSecuenciaDeAmigos red [] _ _ = False
+auxiliarExisteSecuenciaDeAmigos red us u_objetivo lista_negra | pertenece (u_objetivo) (us) = True -- verifica si encontro a u_objetivo en la lista de amigos encadenados.
+        | otherwise = auxiliarExisteSecuenciaDeAmigos (red) (restaListas (amigosDeUsuarios (red) (us)) (lista_negra)) (u_objetivo) (lista_negra ++ us)
 
 
 ---------------------------------------------------------------------------------------------
@@ -227,6 +227,14 @@ mismosElementos :: (Eq t) => [t] -> [t] -> Bool
 -- Sean a, b listas. Devuelve True si a tiene los mismos elementos que b. En otro caso, False.
 -- Las repeticiones y orden no afectan al resultado. Ej: mismosElementos [1,2,3,3,2,1] [1,3,2] -> True
 mismosElementos a b = (esContenido a b) && (esContenido b a)
+
+restaListas :: (Eq t) => [t] -> [t] -> [t]
+-- Requiere: True
+-- Sean a,b listas. a - b son los x tales que x pertenece a A y x no pertenece a b.
+-- Devuelve el resultado restante en el orden en el que aparecian los elementos en A. 
+restaListas [] _ = []
+restaListas (x:xs) lista_b | pertenece x lista_b = restaListas xs lista_b
+                           | otherwise = x : (restaListas xs lista_b)
 
 longitud :: [t] -> Int
 -- Requiere: True

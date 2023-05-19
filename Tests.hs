@@ -151,8 +151,8 @@ testEjercicio9 = test [
     " tieneUnSeguidorFiel 4: Usuario autor intenta ser su propio seguir fiel" ~:
         (tieneUnSeguidorFiel ([usuario1], [], [pubAutoLike1_a]) usuario1) ~?= False, -- False porque pide u != u2
 
-{-     " tieneUnSeguidorFiel 5: A seguidor le gustan todas y solamente las publicaciones de autor" ~: --BORRAR
-        (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_d]) usuario3) ~?= True, -- El seguidor fiel es usuario4 -}
+    " tieneUnSeguidorFiel 5: A seguidor le gustan todas y solamente las publicaciones de autor" ~:
+        (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_d]) usuario3) ~?= True, -- El seguidor fiel es usuario4
 
     " tieneUnSeguidorFiel 6: A seguidor le gustan todas las publicaciones de autor y alguna/s más" ~:
         (tieneUnSeguidorFiel (usuariosTodos, [], [pub3_b, pub3_d, pub1_b, pub2_a]) usuario3) ~?= True, -- El seguidor fiel es usuario4
