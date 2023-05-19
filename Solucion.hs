@@ -50,17 +50,18 @@ proyectarNombresConRepetidos :: [Usuario] -> [String]
 proyectarNombresConRepetidos [] = []
 proyectarNombresConRepetidos (x:xs) = nombreDeUsuario x : proyectarNombresConRepetidos xs
 
--- Devuelve una lista con todos los amigos del usuario dado en la red social dada.
+-- Dada una red y un usuario, devuelve una lista con todos los amigos del usuario.
 amigosDe :: RedSocial -> Usuario -> [Usuario]
-amigosDe r u = proyectarNombresDeAmigosDe u (relaciones r)
+amigosDe r u = auxiliarAmigosDe u (relaciones r)
 
-proyectarNombresDeAmigosDe :: Usuario -> [Relacion] -> [Usuario]
-proyectarNombresDeAmigosDe _ [] = []
-proyectarNombresDeAmigosDe u ((x, y):xs) | u == x = y : proyectarNombresDeAmigosDe u xs 
-                                         | u == y = x : proyectarNombresDeAmigosDe u xs
-                                         | otherwise = proyectarNombresDeAmigosDe u xs
+-- Dado un usuario y una lista de relaciones, devuelve una lista con todos los amigos del usuario.
+auxiliarAmigosDe :: Usuario -> [Relacion] -> [Usuario]
+auxiliarAmigosDe _ [] = []
+auxiliarAmigosDe u ((x, y):xs) | u == x = y : auxiliarAmigosDe u xs 
+                                         | u == y = x : auxiliarAmigosDe u xs
+                                         | otherwise = auxiliarAmigosDe u xs
 
--- Devuelve la cantidad de amigos del usuario dado en la red social dada.
+-- Dada una red y un usuario, devuelve la cantidad de amigos del usuario.
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos r u = contarAmigosDe (relaciones r) u
 
@@ -136,7 +137,7 @@ existeSecuenciaDeAmigos r u1 u2 = existeSecuenciaDeAmigosAuxiliar (relaciones r)
 existeSecuenciaDeAmigosAuxiliar :: [Relacion] -> Usuario -> Usuario -> [Usuario]-> Bool
 existeSecuenciaDeAmigosAuxiliar _ _ _ [] = False
 existeSecuenciaDeAmigosAuxiliar r u u2 (f:fs) | sonAmigos r u u2 = True 
-                                              | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe r u) f u2 (fs ++ (proyectarNombresDeAmigosDe f r))
+                                              | otherwise = existeSecuenciaDeAmigosAuxiliar (eliminarRelacionesDe r u) f u2 (fs ++ (auxiliarAmigosDe f r))
 
 eliminarRelacionesDe :: [Relacion] -> Usuario -> [Relacion]
 eliminarRelacionesDe [] _ = []
@@ -144,7 +145,9 @@ eliminarRelacionesDe (r:rs) u | estaEnRelacion u r = eliminarRelacionesDe rs u
                               | otherwise = r : eliminarRelacionesDe rs u
 
 sonAmigos :: [Relacion] -> Usuario -> Usuario -> Bool
-sonAmigos [] u1 u2 = pertenece u1 (amigosDe red u2)
+sonAmigos [] _ _ = False
+sonAmigos (r:rs) u u2 | estaEnRelacion u r && estaEnRelacion u2 r = True
+                      | otherwise = sonAmigos rs u u2
 
 -- Funciones varias
 
