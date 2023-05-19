@@ -56,20 +56,21 @@ proyectarNombresConRepetidos (x:xs) = nombreDeUsuario x : proyectarNombresConRep
 
 ---------------------------------------- EJERCICIO 2 ----------------------------------------
 
--- Devuelve una lista con todos los amigos del usuario dado en la red social dada.
+-- Dada una red y un usuario, devuelve una lista con todos los amigos del usuario.
 amigosDe :: RedSocial -> Usuario -> [Usuario]
-amigosDe r u = proyectarNombresDeAmigosDe u (relaciones r)
+amigosDe r u = auxiliarAmigosDe u (relaciones r)
 
-proyectarNombresDeAmigosDe :: Usuario -> [Relacion] -> [Usuario]
-proyectarNombresDeAmigosDe _ [] = []
-proyectarNombresDeAmigosDe u ((x, y):xs) | u == x = y : proyectarNombresDeAmigosDe u xs 
-                                         | u == y = x : proyectarNombresDeAmigosDe u xs
-                                         | otherwise = proyectarNombresDeAmigosDe u xs
+-- Dado un usuario y una lista de relaciones, devuelve una lista con todos los amigos del usuario.
+auxiliarAmigosDe :: Usuario -> [Relacion] -> [Usuario]
+auxiliarAmigosDe _ [] = []
+auxiliarAmigosDe u ((x, y):xs) | u == x = y : auxiliarAmigosDe u xs 
+                                         | u == y = x : auxiliarAmigosDe u xs
+                                         | otherwise = auxiliarAmigosDe u xs
 
 
 ---------------------------------------- EJERCICIO 3 ----------------------------------------
 
--- Devuelve la cantidad de amigos del usuario dado en la red social dada.
+-- Dada una red y un usuario, devuelve la cantidad de amigos del usuario.
 cantidadDeAmigos :: RedSocial -> Usuario -> Int
 cantidadDeAmigos red usuario = longitud (amigosDe red usuario)
 
