@@ -144,25 +144,7 @@ eliminarRelacionesDe (r:rs) u | estaEnRelacion u r = eliminarRelacionesDe rs u
                               | otherwise = r : eliminarRelacionesDe rs u
 
 sonAmigos :: [Relacion] -> Usuario -> Usuario -> Bool
-sonAmigos [] _ _ = False
-sonAmigos (r:rs) u u2 | estaEnRelacion u r && estaEnRelacion u2 r = True
-                      | otherwise = sonAmigos rs u u2
--- Idea:
-{-
-existeSecuenciaDeAmigos red u1 u2
-    | u1 se relaciona con u2 = True                                                                                 -- O sea, (u1, u2) existe
-    | (relaciones de u1) se relaciona con u2 = True
-    | otherwise = existeSecuenciaDeAmigos red u1 u2 = existeSecuenciaDeAmigosAux red u1 u1 u2
-
-existeSecuenciaDeAmigosAux :: RedSocial -> Usuario -> Usuario -> Usuario -> Bool
-existeSecuenciaDeAmigosAux red u1 uX u2
-    | longitud (amigosDeAQueNoSeanBOCadenaDeAmigosDeB uX u1) == 0 = False
-    | uX se relaciona con u2 = True                                                                                 -- O sea, (uX, u2) existe
-    | otherwise = existeSecuenciaDeAmigosAux red u1 (Todos los uY tales que Relaciones (uX, uY) existen) u2
-    
-amigosDeAQueNoSeanBOCadenaDeAmigosDeB :: ...
--}
-
+sonAmigos [] u1 u2 = pertenece u1 (amigosDe red u2)
 
 -- Funciones varias
 
