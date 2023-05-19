@@ -42,7 +42,7 @@ likesDePublicacion (_, _, us) = us
 
 -- Devuelve una lista con todos los usuarios de la red social dada.
 nombresDeUsuarios :: RedSocial -> [String]
-nombresDeUsuarios x = proyectarNombres(usuarios x)
+nombresDeUsuarios red = proyectarNombres(usuarios red)
 
 proyectarNombres :: [Usuario] -> [String]
 -- Dada una lista de usuarios, devuelve una lista con los nombres de los usuarios sin repeticiones.
@@ -58,14 +58,14 @@ proyectarNombresConRepetidos (x:xs) = nombreDeUsuario x : proyectarNombresConRep
 
 -- Dada una red y un usuario, devuelve una lista con todos los amigos del usuario.
 amigosDe :: RedSocial -> Usuario -> [Usuario]
-amigosDe r u = auxiliarAmigosDe u (relaciones r)
+amigosDe red u = auxiliarAmigosDe u (relaciones red)
 
 -- Dado un usuario y una lista de relaciones, devuelve una lista con todos los amigos del usuario.
 auxiliarAmigosDe :: Usuario -> [Relacion] -> [Usuario]
 auxiliarAmigosDe _ [] = []
 auxiliarAmigosDe u ((x, y):xs) | u == x = y : auxiliarAmigosDe u xs 
-                                         | u == y = x : auxiliarAmigosDe u xs
-                                         | otherwise = auxiliarAmigosDe u xs
+                               | u == y = x : auxiliarAmigosDe u xs
+                               | otherwise = auxiliarAmigosDe u xs
 
 
 ---------------------------------------- EJERCICIO 3 ----------------------------------------
@@ -135,8 +135,8 @@ lesGustanLasMismasPublicaciones red u1 u2 = mismosElementos (publicacionesQueLeG
 -- Dado un usuario, si este ha hecho publicaciones en la red social dada y existe algún otro usuario que le haya dado "like" a todas ellas, devuelve "True". En otro caso, devuelve "False".
 -- El usuario autor de las publicaciones no puede ser su propio seguidor fiel.
 tieneUnSeguidorFiel :: RedSocial -> Usuario -> Bool
-tieneUnSeguidorFiel r u | (publicacionesDe r u) /= [] = auxiliarTieneUnSeguidorFiel (publicacionesDe r u) (quitar u (usuarios r))
-                        | otherwise = False
+tieneUnSeguidorFiel red u | (publicacionesDe red u) /= [] = auxiliarTieneUnSeguidorFiel (publicacionesDe red u) (quitar u (usuarios red))
+                          | otherwise = False
 
 auxiliarTieneUnSeguidorFiel :: [Publicacion] -> [Usuario]-> Bool
 auxiliarTieneUnSeguidorFiel _ [] = False
@@ -226,8 +226,7 @@ mismosElementos :: (Eq t) => [t] -> [t] -> Bool
 -- Requiere: True
 -- Sean a, b listas. Devuelve True si a tiene los mismos elementos que b. En otro caso, False.
 -- Las repeticiones y orden no afectan al resultado. Ej: mismosElementos [1,2,3,3,2,1] [1,3,2] -> True
-mismosElementos s r = (esContenido s r) && (esContenido r s)
-
+mismosElementos a b = (esContenido a b) && (esContenido b a)
 
 restaListas :: (Eq t) => [t] -> [t] -> [t]
 -- Requiere: True
