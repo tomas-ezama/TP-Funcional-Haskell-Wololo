@@ -92,7 +92,7 @@ auxiliarUsuarioConMasAmigos red (x:y:xs) | cantidadDeAmigos red x >= cantidadDeA
 estaRobertoCarlos :: RedSocial -> Bool
 estaRobertoCarlos red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 1000000
 
--- Función auxiliar para realizar el testing de estaRobertoCarlos. Pide más de 4 amigos en vez de 1000000 amigos.
+-- Función auxiliar para realizar el testing de estaRobertoCarlos. Utiliza 4 en vez de 1000000.
 estaRobertoCarlosTesteable4 :: RedSocial -> Bool
 estaRobertoCarlosTesteable4 red = cantidadDeAmigos (red) (usuarioConMasAmigos (red)) > 4
 
@@ -105,6 +105,7 @@ publicacionesDe red u = auxiliarPublicacionesDe (publicaciones (red)) (u)
 
 auxiliarPublicacionesDe :: [Publicacion] -> Usuario -> [Publicacion]
 auxiliarPublicacionesDe [] _ = []
+--auxiliarPublicacionesDe (x:xs) u = if (usuarioDePublicacion (x)) == u then (x) : auxiliarPublicacionesDe xs u else auxiliarPublicacionesDe xs u
 auxiliarPublicacionesDe (x:xs) u | usuarioDePublicacion x == u = x : auxiliarPublicacionesDe xs u
                                  | otherwise = auxiliarPublicacionesDe xs u
 
